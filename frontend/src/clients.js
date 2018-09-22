@@ -10,12 +10,13 @@ import {
   EditButton,
   DisabledInput,
   LongTextInput,
-  ReferenceInput,
-  SelectInput,
+  NumberInput,
   SimpleForm,
   TextInput,
   Toolbar,
-  SaveButton
+  SaveButton,
+  ImageField,
+  ImageInput,
 } from 'react-admin';
 
 export const ClientList = props => (
@@ -24,6 +25,8 @@ export const ClientList = props => (
       <TextField source="id" />
       <TextField source="fname" />
       <TextField source="lname" />
+      <TextField source="client_id" />
+      <ImageField source="image.src" title="image.title" />
       <EditButton basePath="/client" />
     </Datagrid>
   </List>
@@ -50,7 +53,11 @@ export const ClientCreate = props => (
       <TextInput source="lname" label="Last Name" />
       <TextInput source="email" label="Email" />
       <TextInput source="phone" label="Phone Number" />
-      <TextInput source="photo" label="Photo (url)" />
+      <TextInput source="agency_id" label="Phone Number" />
+      {/* <TextInput source="photo" label="Photo (url)" /> */}
+      <ImageInput source="image" label="Related pictures" accept="image/*">
+          <ImageField source="src" title="title" />
+      </ImageInput>
     </SimpleForm>
   </Create>
 );
@@ -61,6 +68,7 @@ export const ClientEdit = props => (
       <DisabledInput source="id" />
       <LongTextInput source="fname" />
       <LongTextInput source="lname" />
+      <LongTextInput source="agency_id" label="Phone Number" />
     </SimpleForm>
   </Edit>
 );
