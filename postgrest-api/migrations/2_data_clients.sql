@@ -5,6 +5,20 @@ VALUES (1, 'Crib', '["size"]', 'a young child''s bed with barred or latticed sid
 INSERT INTO agencies
 VALUES (1, '{}', null, '778-331-4500', null, 'http://www.vacfss.com/programs/child-protection/', 'Aboriginal Child Protection Agency East Vancouver'), (2, '{}', null, '604-253-4044', null, 'UGM.ca', 'Union Gospel Mission'), (3, '{}', null, '604-895-5849', null, 'singlemothers@ywcavan.org', 'YWCA Single Mother’s Support Services'), (4, '{}', null, '604-872-7676', null, 'http://salvationarmyvcfs.com/', 'Salvation Army');
 
-
 INSERT INTO clients
 VALUES (2, 'Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 'Pending', 1);
+
+INSERT INTO referrals_form_inputs
+VALUES (1, 'First name', 'shortAnswer', 'FALSE');
+
+INSERT INTO referrals_form_inputs
+VALUES (2, 'Last name', 'shortAnswer', 'FALSE');
+
+INSERT INTO referrals_form_inputs
+VALUES (3, 'Email', 'shortAnswer', 'FALSE');
+
+INSERT INTO referrals_form_inputs
+VALUES (4, 'Phone number', 'shortAnswer', 'FALSE');
+
+INSERT INTO referrals_form_inputs
+VALUES (5, 'Photo (URL)', 'shortAnswer', 'FALSE');
