@@ -7,10 +7,9 @@ CREATE TABLE IF NOT EXISTS item_types (
 	description VARCHAR(255),
 	requirements jsonb,
 	exp_time TIME,
-	PRIMARY KEY (id)
-	image_path VARCHAR(100),
-	) ;
-
+	PRIMARY KEY (id),
+	image_path VARCHAR(100)
+);
 
 CREATE TABLE IF NOT EXISTS client (
   id SERIAL,
@@ -24,35 +23,34 @@ CREATE TABLE IF NOT EXISTS client (
 	image_path VARCHAR(100),
 	agency_id INTEGER REFERENCES agencies(id),
 	PRIMARY KEY (id)
-	) ;
-
+);
  
 CREATE TABLE IF NOT EXISTS agencies (
-    id SERIAL,
-    image_path VARCHAR(100),
+  id SERIAL,
+  image_path VARCHAR(100),
 	email VARCHAR(50) NOT NULL,
 	phone VARCHAR(20) NOT NULL,
 	address VARCHAR(100),
 	agency VARCHAR(100) NOT NULL,
 	PRIMARY KEY (id)
-	);
+);
 
 CREATE TABLE IF NOT EXISTS drop_locations (
   id SERIAL,
   address VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
-  );
+);
 
 CREATE TABLE IF NOT EXISTS item_status(
   id SERIAL,
   client_id INTEGER REFERENCES client(id),
-  msg TEXT, 
+  msg TEXT,
   image_path VARCHAR(100),
   address VARCHAR(100) NOT NULL,
   status VARCHAR(100) NOT NULL,
   updated_at DATE,
   PRIMARY KEY (id)
-  );
+);
 
 CREATE TABLE IF NOT EXISTS item_inventory (
   id SERIAL,
@@ -64,7 +62,7 @@ CREATE TABLE IF NOT EXISTS item_inventory (
   location_id INTEGER REFERENCES drop_locations(id),
   added_by VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
-  );
+);
 
 
 
