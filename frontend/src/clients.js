@@ -32,7 +32,6 @@ export const ClientList = props => (
       <TextField source="lname" />
       <TextField source="email" />
       <TextField source="phone" />
-      <TextField source="custom_info" />
       <TextField source="agent" />
       <ImageField source="image.src" title="image.title" />
       <TextField source="approval_status" />
@@ -64,7 +63,6 @@ export const ClientCreate = props => (
       <TextInput source="email" label="Email" />
       <TextInput source="phone" label="Phone Number" />
       <TextInput source="agent" label="Reference Agency" />
-      <DateInput source="custom_data" label="DOB" />
       <ImageInput source="image" label="Related pictures" accept="image/*">
           <ImageField source="src" title="title" />
       </ImageInput>
