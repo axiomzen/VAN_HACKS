@@ -12,11 +12,14 @@ import {
   LongTextInput,
   ReferenceInput,
   SelectInput,
+  SelectField,
   SimpleForm,
   TextInput,
   Toolbar,
   SaveButton
 } from 'react-admin';
+
+import ApprovalStatusField from './ApprovalStatusField';
 
 export const ClientList = props => (
   <List {...props}>
@@ -24,7 +27,8 @@ export const ClientList = props => (
       <TextField source="id" />
       <TextField source="fname" />
       <TextField source="lname" />
-      <EditButton basePath="/client" />
+      <ApprovalStatusField source="approval_status" />
+      <EditButton basePath="/clients" />
     </Datagrid>
   </List>
 );
@@ -61,6 +65,14 @@ export const ClientEdit = props => (
       <DisabledInput source="id" />
       <LongTextInput source="fname" />
       <LongTextInput source="lname" />
+      <SelectInput
+        source="approval_status"
+        choices={[
+          { id: 'Pending', name: 'Pending' },
+          { id: 'Approved', name: 'Approved' },
+          { id: 'Rejected', name: 'Rejected' }
+        ]}
+      />
     </SimpleForm>
   </Edit>
 );
