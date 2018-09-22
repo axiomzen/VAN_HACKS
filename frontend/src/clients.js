@@ -19,7 +19,7 @@ import {
   Toolbar,
   SaveButton,
   ImageField,
-  ImageInput,
+  ImageInput
 } from 'react-admin';
 
 import ApprovalStatusField from './ApprovalStatusField';
@@ -34,7 +34,7 @@ export const ClientList = props => (
       <TextField source="phone" />
       <TextField source="agent" />
       <ImageField source="image.src" title="image.title" />
-      <TextField source="approval_status" />
+      <ApprovalStatusField source="approval_status" />
       <EditButton basePath="/client" />
     </Datagrid>
   </List>
@@ -64,7 +64,7 @@ export const ClientCreate = props => (
       <TextInput source="phone" label="Phone Number" />
       <TextInput source="agent" label="Reference Agency" />
       <ImageInput source="image" label="Related pictures" accept="image/*">
-          <ImageField source="src" title="title" />
+        <ImageField source="src" title="title" />
       </ImageInput>
     </SimpleForm>
   </Create>
