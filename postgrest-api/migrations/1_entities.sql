@@ -7,15 +7,16 @@ CREATE TABLE IF NOT EXISTS item_types (
   description TEXT,
   requirements JSONB,
   exp_time_months INTEGER,
-  image_path TEXT
+  image JSONB
 );
 
 CREATE TABLE IF NOT EXISTS agencies (
   id SERIAL PRIMARY KEY,
-  image_path TEXT,
-  email TEXT NOT NULL,
-  phone TEXT NOT NULL,
+  image JSONB,
+  email TEXT,
+  phone TEXT,
   address TEXT,
+  website TEXT,
   agency TEXT NOT NULL
 );
 
@@ -23,12 +24,11 @@ CREATE TABLE IF NOT EXISTS clients (
   id SERIAL PRIMARY KEY,
   lname TEXT NOT NULL,
   fname TEXT NOT NULL,
-  shopping_list JSONB,
   email TEXT,
   phone TEXT,
   custom_info JSONB,
   agent TEXT,
-  image_path TEXT,
+  image JSONB,
   approval_status TEXT DEFAULT 'Pending',
   agency_id INTEGER,
   FOREIGN KEY (agency_id) REFERENCES agencies (id)
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS drop_locations(
 CREATE TABLE IF NOT EXISTS item_status(
   id SERIAL PRIMARY KEY,
   msg TEXT,
-  image_path TEXT,
+  image JSONB,
   status TEXT NOT NULL,
   updated_at DATE,
   shopping_list_item_id INTEGER,
