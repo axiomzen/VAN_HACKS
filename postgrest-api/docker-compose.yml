@@ -33,3 +33,11 @@ services:
     command: postgres -c app.jwt_secret=${PGRST_JWT_SECRET} -c app.jwt_duration=${PGRST_JWT_DURATION:-3600}
     volumes:
       - ./migrations/:/docker-entrypoint-initdb.d/
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui:3.15.0
+    ports:
+      - "8080:8080"
+    environment:
+      - API_URL=http://localhost:3000/
+    restart: always
