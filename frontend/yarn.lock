@@ -229,13 +229,6 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-aor-postgrest-client@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/aor-postgrest-client/-/aor-postgrest-client-0.2.5.tgz#6432477f2ea5f9f37f50cc29bedf7d41a5acb7fc"
-  dependencies:
-    ra-core "^2.0.3"
-    react "^16.4.1"
-
 append-transform@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/append-transform/-/append-transform-0.4.0.tgz#d76ebf8ca94d276e247a36bad44a4b74ab611991"
@@ -5798,7 +5791,7 @@ querystringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.0.0.tgz#fa3ed6e68eb15159457c89b37bc6472833195755"
 
-ra-core@^2.0.3, ra-core@^2.3.2:
+ra-core@^2.3.2, ra-core@latest:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.3.2.tgz#9e028e45fd4e7ab01c965c4869ca0fd6e774d6a0"
   dependencies:
@@ -6109,7 +6102,7 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.4.1, react@^16.5.2:
+react@^16.5.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
   dependencies:

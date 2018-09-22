@@ -1,6 +1,6 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
-import postgrestProvider from 'aor-postgrest-client';
+import postgrestProvider from './postgrestProvider';
 
 import createAuthClient from './authClient';
 import { TodosList, TodoCreate } from './todos';
