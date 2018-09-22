@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS item_types (
   requirements JSONB,
   exp_time_months INTEGER,
   image_path TEXT
+);
 
 
 CREATE TABLE IF NOT EXISTS agencies (
@@ -26,7 +27,7 @@ CREATE TABLE shopping_list_items (
 	priority INTEGER,
 	date_requested DATE DEFAULT CURRENT_DATE,
   FOREIGN KEY (agency_id) REFERENCES agencies (id)
-	);
+);
 
 CREATE TABLE IF NOT EXISTS clients (
   id SERIAL PRIMARY KEY,
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS drop_locations (
   address TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS item_status(
+CREATE TABLE IF NOT EXISTS item_status (
   id SERIAL PRIMARY KEY,
   client_list_item_id INTEGER,
   msg TEXT,
@@ -57,6 +58,7 @@ CREATE TABLE IF NOT EXISTS item_status(
   status TEXT NOT NULL,
   updated_at DATE,
   FOREIGN KEY (client_list) REFERENCES shopping_list_items(id)
+);
 
 
 CREATE TABLE IF NOT EXISTS item_inventory (
