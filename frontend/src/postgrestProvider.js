@@ -96,7 +96,7 @@ export default (apiUrl, httpClient = fetchJson) => {
                 break;
             }
             case GET_MANY: {
-                url = `${apiUrl}/${resource}?id=in.${params.ids.join(',')}`;
+                url = `${apiUrl}/${resource}?id=in.(${params.ids.join(',')})`;
                 break;
             }
             case GET_MANY_REFERENCE: {
@@ -165,7 +165,7 @@ export default (apiUrl, httpClient = fetchJson) => {
             case UPDATE:
                 return { data: params.data, id: params.id };
             case DELETE:
-                return { data: [] ,id: params.id };
+                return { data: [], id: params.id };
             case DELETE_MANY:
                 return { data: [], id: params.id };
             case GET_ONE:
