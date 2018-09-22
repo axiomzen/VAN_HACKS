@@ -3,7 +3,9 @@
 
 ## Usage
 
-- Postgrest API: Port 3000
+- Postgrest API: 
+  - `docker-compose up`
+  - Port 3000
 
 - Fontend: Port 4000
 

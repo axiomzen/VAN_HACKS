@@ -1,14 +1,25 @@
+---- Unauthenticated user
 
 CREATE ROLE anon NOLOGIN;
 GRANT anon TO admin;
 GRANT USAGE ON SCHEMA public TO anon;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon;
+
+
+---- Authenticated user
+-- temporarily enable anonymous user to have all privileges
+-- ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO anon;
 
 CREATE ROLE someone NOLOGIN;
 GRANT someone TO admin;
 GRANT USAGE ON SCHEMA public TO someone;
+
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO someone;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO someone;
+
+
+---- Authentication
 
 CREATE SCHEMA auth;
 
