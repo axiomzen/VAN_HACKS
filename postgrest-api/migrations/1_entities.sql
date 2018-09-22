@@ -20,15 +20,6 @@ CREATE TABLE IF NOT EXISTS agencies (
   agency TEXT NOT NULL
 );
 
-CREATE TABLE shopping_list_items (
-  id SERIAL PRIMARY KEY,
-	item_category VARCHAR(255) NOT NULL,
-	item_labels jsonb,
-	priority INTEGER,
-	date_requested DATE DEFAULT CURRENT_DATE,
-  FOREIGN KEY (agency_id) REFERENCES agencies (id)
-);
-
 CREATE TABLE IF NOT EXISTS clients (
   id SERIAL PRIMARY KEY,
   lname TEXT NOT NULL,
@@ -39,9 +30,19 @@ CREATE TABLE IF NOT EXISTS clients (
   custom_info JSONB,
   agent TEXT,
   image_path TEXT,
-  agency_id INTEGER,
   approval_status VARCHAR(100),
+  agency_id INTEGER,
   FOREIGN KEY (agency_id) REFERENCES agencies (id)
+);
+
+CREATE TABLE IF NOT EXISTS shopping_list_items (
+  id SERIAL PRIMARY KEY,
+  item_category VARCHAR(255) NOT NULL,
+  item_labels jsonb,
+  priority INTEGER,
+  date_requested DATE DEFAULT CURRENT_DATE,
+  client_id INTEGER,
+  FOREIGN KEY (client_id) REFERENCES clients (id)
 );
 
 CREATE TABLE IF NOT EXISTS drop_locations (
