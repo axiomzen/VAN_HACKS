@@ -20,8 +20,7 @@ export const ShoppingListsList = props => (
   <List {...props}>
     <Datagrid>
       <TextField source="id" />
-      <TextField source="task" />
-      <EditButton basePath="/shopping_list" />
+      <EditButton basePath="/shopping_list_items" />
     </Datagrid>
   </List>
 );
@@ -29,7 +28,7 @@ export const ShoppingListsList = props => (
 export const ShoppingListsCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <LongTextInput source="task" />
+      <LongTextInput source="item_category" />
     </SimpleForm>
   </Create>
 );
@@ -38,7 +37,7 @@ export const ShoppingListsEdit = props => (
   <Edit {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <LongTextInput source="task" />
+      <LongTextInput source="item_category" />
     </SimpleForm>
   </Edit>
 );
