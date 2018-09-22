@@ -8,8 +8,18 @@ import { ItemList, ItemCreate, ItemEdit } from './items';
 
 import httpClient from './httpClient';
 import customRoutes from './customRoutes';
+import fakeDataProvider from 'ra-data-fakerest';
+// const dataProvider = postgrestProvider('/api', httpClient);
 
-const dataProvider = postgrestProvider('/api', httpClient);
+const dataProvider = fakeDataProvider({
+  item_types: [
+    { id: 0, description: 'test' },
+  ],
+  item_inventory: [
+    { id: 0, item_type: 0 }
+  ]
+})
+
 const authProvider = createAuthClient('/api');
 const App = () => (
   <Admin

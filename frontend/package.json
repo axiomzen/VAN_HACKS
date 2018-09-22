@@ -8,7 +8,8 @@
     "react-admin": "latest",
     "react-dom": "^16.5.2",
     "react-scripts": "1.1.5",
-    "ra-core": "latest"
+    "ra-core": "latest",
+    "ra-data-fakerest": "latest"
   },
   "scripts": {
     "start": "PORT=4000 react-scripts start",
