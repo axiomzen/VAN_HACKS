@@ -1,18 +1,26 @@
 INSERT INTO auth.users VALUES ('demo@example.org', 'demo');
 
 CREATE TABLE IF NOT EXISTS item_types (
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
 	item_category VARCHAR(255) NOT NULL,
 	item_labels jsonb, 
 	description VARCHAR(255),
 	requirements jsonb,
 	exp_time TIME,
-	PRIMARY KEY (id),
 	image_path VARCHAR(100)
 );
 
+CREATE TABLE IF NOT EXISTS agencies (
+  id SERIAL PRIMARY KEY,
+  image_path VARCHAR(100),
+	email VARCHAR(50) NOT NULL,
+	phone VARCHAR(20) NOT NULL,
+	address VARCHAR(100),
+	agency VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS client (
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
 	lname VARCHAR(50) NOT NULL,
 	fname VARCHAR(50) NOT NULL,
 	shopping_list jsonb,
@@ -21,47 +29,33 @@ CREATE TABLE IF NOT EXISTS client (
 	custom_info jsonb,
 	agent VARCHAR(80),
 	image_path VARCHAR(100),
-	agency_id INTEGER REFERENCES agencies(id),
-	PRIMARY KEY (id)
-);
- 
-CREATE TABLE IF NOT EXISTS agencies (
-  id SERIAL,
-  image_path VARCHAR(100),
-	email VARCHAR(50) NOT NULL,
-	phone VARCHAR(20) NOT NULL,
-	address VARCHAR(100),
-	agency VARCHAR(100) NOT NULL,
-	PRIMARY KEY (id)
+	agency_id INTEGER REFERENCES agencies(id)
 );
 
 CREATE TABLE IF NOT EXISTS drop_locations (
-  id SERIAL,
-  address VARCHAR(100) NOT NULL,
-  PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY,
+  address VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS item_status(
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
   client_id INTEGER REFERENCES client(id),
   msg TEXT,
   image_path VARCHAR(100),
   address VARCHAR(100) NOT NULL,
   status VARCHAR(100) NOT NULL,
-  updated_at DATE,
-  PRIMARY KEY (id)
+  updated_at DATE
 );
 
 CREATE TABLE IF NOT EXISTS item_inventory (
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
   item_type INTEGER REFERENCES item_types(id),
   item_labels jsonb,
   item_status INTEGER REFERENCES item_status(id),
   image_path VARCHAR(100),
   donor_email VARCHAR(100),
   location_id INTEGER REFERENCES drop_locations(id),
-  added_by VARCHAR(100) NOT NULL,
-  PRIMARY KEY (id)
+  added_by VARCHAR(100) NOT NULL
 );
 
 
