@@ -7,10 +7,10 @@ import {
   Datagrid,
   ReferenceField,
   TextField,
+  DateInput,
   EditButton,
   DisabledInput,
   LongTextInput,
-  NumberInput,
   SimpleForm,
   TextInput,
   Toolbar,
@@ -25,8 +25,12 @@ export const ClientList = props => (
       <TextField source="id" />
       <TextField source="fname" />
       <TextField source="lname" />
-      <TextField source="client_id" />
+      <TextField source="email" />
+      <TextField source="phone" />
+      <TextField source="custom_info" />
+      <TextField source="agent" />
       <ImageField source="image.src" title="image.title" />
+      <TextField source="approval_status" />
       <EditButton basePath="/client" />
     </Datagrid>
   </List>
@@ -51,10 +55,11 @@ export const ClientCreate = props => (
       <h4>Submit New Referral</h4>
       <TextInput source="fname" label="First Name" />
       <TextInput source="lname" label="Last Name" />
+      <TextInput source="agency_id" label="Agency" />
       <TextInput source="email" label="Email" />
       <TextInput source="phone" label="Phone Number" />
-      <TextInput source="agency_id" label="Phone Number" />
-      {/* <TextInput source="photo" label="Photo (url)" /> */}
+      <TextInput source="agent" label="Reference Agency" />
+      <DateInput source="custom_data" label="DOB" />
       <ImageInput source="image" label="Related pictures" accept="image/*">
           <ImageField source="src" title="title" />
       </ImageInput>
@@ -68,7 +73,7 @@ export const ClientEdit = props => (
       <DisabledInput source="id" />
       <LongTextInput source="fname" />
       <LongTextInput source="lname" />
-      <LongTextInput source="agency_id" label="Phone Number" />
+      <LongTextInput source="agency_id" />
     </SimpleForm>
   </Edit>
 );
