@@ -33,3 +33,12 @@ export const TodoCreate = props => (
     </SimpleForm>
   </Create>
 );
+
+export const PostEdit = props => (
+  <Edit {...props}>
+    <SimpleForm>
+      <DisabledInput source="id" />
+      <LongTextInput source="task" />
+    </SimpleForm>
+  </Edit>
+);
