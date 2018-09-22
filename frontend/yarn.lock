@@ -5891,7 +5891,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-admin@^2.3.2:
+react-admin@latest:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.3.2.tgz#4fa8384f80cb2cc1c8ab0759721cbe2fcebcde3e"
   dependencies:
