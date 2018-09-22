@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS agencies (
   agency VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS client (
+CREATE TABLE IF NOT EXISTS clients (
   id SERIAL PRIMARY KEY,
   lname VARCHAR(50) NOT NULL,
   fname VARCHAR(50) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS item_status(
   address VARCHAR(100) NOT NULL,
   status VARCHAR(100) NOT NULL,
   updated_at DATE,
-  FOREIGN KEY (client_id) REFERENCES client(id)
+  FOREIGN KEY (client_id) REFERENCES clients(id)
 );
 
 CREATE TABLE IF NOT EXISTS item_inventory (
