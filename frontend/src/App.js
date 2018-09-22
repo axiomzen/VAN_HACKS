@@ -27,18 +27,19 @@ const App = () => (
     customRoutes={customRoutes}
   >
     <Resource
+      options={{ label: 'Clients form' }}
+      name="referrals_form_inputs"
+      list={ReferralsFormFieldsList}
+      create={ReferralsFormFieldsCreate}
+      edit={ReferralsFormFieldsEdit}
+    />
+    <Resource
       name="clients"
       list={ClientList}
       create={ClientCreate}
       edit={ClientEdit}
     />
-    <Resource
-        options={{ label: 'Referral form inputs' }}
-        name="referralFormInputs"
-        list={ReferralsFormFieldsList}
-        create={ReferralsFormFieldsCreate}
-        edit={ReferralsFormFieldsEdit}
-    />
+
     <Resource
       options={{ label: 'Shopping lists' }}
       name="shopping_list_items"
