@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS item_inventory (
   item_type INTEGER,
   item_labels JSONB,
   item_status INTEGER,
-  image_path TEXT,
+  image JSONB,
   donor_email TEXT,
   location_id INTEGER,
   added_by TEXT NOT NULL,
