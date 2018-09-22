@@ -14,15 +14,27 @@ import {
   SelectInput,
   SimpleForm,
   TextInput,
-  BooleanInput
+  BooleanInput,
+  BooleanField,
+  SelectField
 } from 'react-admin';
+
+const inputTypes = [
+  { id: 'shortAnswer', name: 'Short answer' },
+  { id: 'paragraph', name: 'Paragraph' },
+  { id: 'multipleChoices', name: 'Multiple choice' },
+  { id: 'checkboxes', name: 'Checkbox' },
+  { id: 'dropDown ', name: 'Drop-down' },
+];
 
 export const ReferralsFormFieldsList = props => (
   <List {...props}>
     <Datagrid>
       <TextField source="id" />
-      <TextField source="task" />
-      <EditButton basePath="/shopping_list" />
+      <TextField source="name" />
+      <SelectField source="type" choices={inputTypes} />
+      <BooleanField source="optional" />
+      <EditButton basePath="/referrals_form_inputs" />
     </Datagrid>
   </List>
 );
@@ -30,15 +42,9 @@ export const ReferralsFormFieldsList = props => (
 export const ReferralsFormFieldsCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput source="label name" />
-      <SelectInput source="type" choices={[
-        { id: 'shortAnswer', name: 'Short answer' },
-        { id: 'paragraph', name: 'Paragraph' },
-        { id: 'multipleChoices', name: 'Multiple choice' },
-        { id: 'checkboxes', name: 'Checkbox' },
-        { id: 'dropDown ', name: 'Drop-down' },
-      ]} />
-      <BooleanInput label="Optional" source="commentable" />
+      <TextInput label="Label name" source="name" />
+      <SelectInput label="Type" source="type" choices={inputTypes} />
+      <BooleanInput label="Optional" source="optional" />
     </SimpleForm>
   </Create>
 );
@@ -46,8 +52,9 @@ export const ReferralsFormFieldsCreate = props => (
 export const ReferralsFormFieldsEdit = props => (
   <Edit {...props}>
     <SimpleForm>
-      <DisabledInput source="id" />
-      <LongTextInput source="task" />
+      <TextInput label="Label name" source="name" />
+      <SelectInput label="Type" source="type" choices={inputTypes} />
+      <BooleanInput label="Optional" source="optional" />
     </SimpleForm>
   </Edit>
 );
