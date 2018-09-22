@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS clients (
   custom_info JSONB,
   agent TEXT,
   image JSONB,
-  approval_status TEXT,
+  approval_status TEXT DEFAULT 'Pending',
   agency_id INTEGER,
   FOREIGN KEY (agency_id) REFERENCES agencies (id)
 );
