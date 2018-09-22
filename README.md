@@ -8,3 +8,10 @@
 - Fontend: Port 4000
 
 - Swagger UI: Port 8080
+
+
+- Credentials:
+
+  User: `demo@example.org`
+  Password `demo`
+
