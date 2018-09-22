@@ -11,6 +11,9 @@ import {
   EditButton,
   DisabledInput,
   LongTextInput,
+  ReferenceInput,
+  SelectInput,
+  SelectField,
   SimpleForm,
   TextInput,
   Toolbar,
@@ -18,6 +21,8 @@ import {
   ImageField,
   ImageInput,
 } from 'react-admin';
+
+import ApprovalStatusField from './ApprovalStatusField';
 
 export const ClientList = props => (
   <List {...props}>

@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS item_types (
 CREATE TABLE IF NOT EXISTS agencies (
   id SERIAL PRIMARY KEY,
   image JSONB,
-  email TEXT NOT NULL,
-  phone TEXT NOT NULL,
+  email TEXT,
+  phone TEXT,
   address TEXT,
+  website TEXT,
   agency TEXT NOT NULL
 );
 
@@ -23,7 +24,6 @@ CREATE TABLE IF NOT EXISTS clients (
   id SERIAL PRIMARY KEY,
   lname TEXT NOT NULL,
   fname TEXT NOT NULL,
-  shopping_list JSONB,
   email TEXT,
   phone TEXT,
   custom_info JSONB,
