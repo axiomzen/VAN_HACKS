@@ -35,17 +35,16 @@ CREATE TABLE IF NOT EXISTS clients (
 );
 
 CREATE TABLE shopping_list_items (
-  id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
 	item_category TEXT NOT NULL,
-	item_labels jsonb,
-	priority INTEGER,
+	item_labels JSONB,
+	item_priority INTEGER,
 	date_requested DATE DEFAULT CURRENT_DATE,
   client_id INTEGER,
   FOREIGN KEY (client_id) REFERENCES clients (id)
 	);
 
-
-CREATE TABLE IF NOT EXISTS drop_locations (
+CREATE TABLE IF NOT EXISTS drop_locations(
   id SERIAL PRIMARY KEY,
   address TEXT NOT NULL
 );
@@ -54,11 +53,12 @@ CREATE TABLE IF NOT EXISTS item_status(
   id SERIAL PRIMARY KEY,
   msg TEXT,
   image_path TEXT,
-  address TEXT NOT NULL,
   status TEXT NOT NULL,
   updated_at DATE,
-  client_list_item_id INTEGER,
-  FOREIGN KEY (client_list_item_id) REFERENCES shopping_list_items(id)
+  shopping_list_item_id INTEGER,
+  drop_locations INTEGER,
+  FOREIGN KEY (drop_locations) REFERENCES drop_locations(id),
+  FOREIGN KEY (shopping_list_item_id) REFERENCES shopping_list_items(id)
 );
 
 CREATE TABLE IF NOT EXISTS item_inventory (
@@ -72,5 +72,5 @@ CREATE TABLE IF NOT EXISTS item_inventory (
   added_by TEXT NOT NULL,
   FOREIGN KEY (item_type) REFERENCES item_types(id),
   FOREIGN KEY (item_status) REFERENCES item_status(id),
-  FOREIGN KEY (location_id) REFERENCES drop_locations(id)
+  FOREIGN KEY (location_id) REFERENCES shopping_list_items(id)
 );
