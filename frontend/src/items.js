@@ -20,7 +20,7 @@ import {
 } from 'react-admin';
 
 export const ItemList = props => (
-  <List {...props}>
+  <List {...props} title="Items">
     <Datagrid>
       <TextField source="id" />
       <EditButton basePath="/item_inventory" />
@@ -29,11 +29,13 @@ export const ItemList = props => (
 );
 
 export const ItemCreate = props => (
-  <Create {...props}>
+  <Create {...props} title="Create item">
     <SimpleForm>
-      <TextInput source="id" />
       <ReferenceInput label="Type" source="item_type" reference="item_types">
         <AutocompleteInput optionText="description"/>
+      </ReferenceInput>
+      <ReferenceInput label="Status" source="item_status" reference="item_status">
+        <SelectInput optionText="status"/>
       </ReferenceInput>
     </SimpleForm>
   </Create>

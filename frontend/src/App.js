@@ -8,6 +8,7 @@ import { ItemList, ItemCreate, ItemEdit } from './items';
 
 import httpClient from './httpClient';
 import customRoutes from './customRoutes';
+import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
 const dataProvider = postgrestProvider('/api', httpClient);
 
 const authProvider = createAuthClient('/api');
@@ -25,6 +26,7 @@ const App = () => (
     />
 
     <Resource
+      options={{label: "Items"}}
       name="item_inventory"
       list={ItemList}
       create={ItemCreate}
@@ -32,7 +34,12 @@ const App = () => (
     />
 
     <Resource
-      name="item_types"/>
+      options={{label: "Items types"}}
+      name="item_types"
+      list={ItemTypesList}
+      create={ItemTypesCreate}
+      edit={ItemTypesEdit}
+      />
 
     <Resource
       name="item_status"/>
