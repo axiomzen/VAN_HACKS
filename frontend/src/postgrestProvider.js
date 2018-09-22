@@ -155,7 +155,7 @@ export default (apiUrl, httpClient = fetchJson) => {
                 if (!headers.has('content-range')) {
                     throw new Error('The Content-Range header is missing in the HTTP Response. The simple REST client expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare Content-Range in the Access-Control-Expose-Headers header?');
                 }
-                const maxInPage = parseInt(headers.get('content-range').split('/')[0].split('-').pop(), 10) +1
+                const maxInPage = parseInt(headers.get('content-range').split('/')[0].split('-').pop(), 10) + 1
                 return {
                     data: json.map(x => x),
                     total: parseInt(headers.get('content-range').split('/').pop(), 10) || maxInPage,
@@ -165,7 +165,7 @@ export default (apiUrl, httpClient = fetchJson) => {
             case UPDATE:
                 return { data: params.data, id: params.id };
             case DELETE:
-                return { data: [], id: params.id };
+                return { data: {id: params.id} };
             case DELETE_MANY:
                 return { data: [], id: params.id };
             case GET_ONE:
