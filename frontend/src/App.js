@@ -7,6 +7,8 @@ import { ClientList, ClientCreate, ClientEdit } from './clients';
 import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 
+import './App.css';
+
 const dataProvider = postgrestProvider('/api', httpClient);
 const authProvider = createAuthClient('/api');
 const App = () => (
