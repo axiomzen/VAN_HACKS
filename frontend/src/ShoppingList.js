@@ -66,8 +66,8 @@ class ShoppingList extends Component {
                   onChange={this.handleChange}
                 >
                   <option value="">Select Item Type</option>
-                  {this.state.itemTypes.map(({ item_category }) => (
-                    <option key={item_category} value={item_category}>
+                  {this.state.itemTypes.map(({ item_category, id }) => (
+                    <option key={item_category} value={id}>
                       {item_category}
                     </option>
                   ))}
@@ -90,9 +90,12 @@ class ShoppingList extends Component {
         <Card>
           <CardHeader title="Existing Shopping List" />
           <CardContent>
-            {this.state.shoppingList.map(item => (
-              <div key={item.id}> {item.item_category} </div>
-            ))}
+            {this.state.shoppingList.map(item => {
+              const type = this.state.itemTypes[item.item_type - 1];
+              return (
+                <div key={item.id}>{type ? type.item_category : '??'}</div>
+              );
+            })}
           </CardContent>
         </Card>
       </div>
