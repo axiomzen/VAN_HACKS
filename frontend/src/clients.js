@@ -35,7 +35,7 @@ export const ClientList = props => (
       <TextField source="agent" />
       <ImageField source="image.src" title="image.title" />
       <ApprovalStatusField source="approval_status" />
-      <EditButton basePath="/client" />
+      <EditButton basePath="/clients" />
     </Datagrid>
   </List>
 );
