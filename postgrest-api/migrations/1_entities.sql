@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS referrals_form_inputs (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   type TEXT NOT NULL,
-  optional BOOLEAN
+  optional BOOLEAN DEFAULT false
 );
 
 ALTER TABLE item_status ADD CONSTRAINT fkey FOREIGN KEY (item_inventory_id) REFERENCES item_inventory(id);

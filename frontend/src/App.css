@@ -57,3 +57,31 @@
     padding-left: 24px;
   }
 }
+
+div[class^="FormInput-input-"] {
+  width: 100% !important;
+}
+
+.ClientTabs {
+  display: flex;
+}
+
+.ClientTab {
+  color: #676767;
+  padding: 18px 25px;
+  position: relative;
+  overflow: hidden;
+  max-width: 264px;
+  min-width: 72px;
+  font-size: 0.875rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.ClientTab--selected {
+  color: rgba(0, 0, 0, 0.87);
+  border-bottom: 2px solid #3f4ebc;
+}
+
