@@ -47,15 +47,16 @@ async function findMatch(typeId) {
   // - limit one
 
   const res = await client.query(`
-      SELECT 
-          item_inventory.id AS item_inventory_id, 
-          shopping_list_items.id AS shopping_list_item_id
-      FROM item_inventory
-      INNER JOIN shopping_list_items
-          ON shopping_list_items.item_type = item_inventory.item_type
-      WHERE item_inventory.item_type = $1
-    `,
-    [typeId]
+  SELECT 
+  item_inventory.id as inv_id, shopping_list_items.id as list_id
+FROM item_inventory
+INNER JOIN shopping_list_items
+  ON shopping_list_items.item_type = item_inventory.item_type
+LEFT JOIN item_status ON item_status.shopping_list_item_id = shopping_list_items.id
+WHERE item_status.status IS NULL AND item_inventory.item_type = 1
+ORDER BY shopping_list_items.item_priority
+LIMIT 1;
+    `
   )
   console.log("!!!", res.rows)
 }
