@@ -46,7 +46,7 @@ export const ClientList = props => {
       </Datagrid>
     </List>
   );
-}
+};
 
 const PostCreateToolbar = props => (
   <Toolbar {...props}>
@@ -59,18 +59,27 @@ const PostCreateToolbar = props => (
   </Toolbar>
 );
 
-const redirect = (basePath, id, data) => `/confirmation/${data.id}`;
+const redirect = (basePath, id, data) => `/clients/${data.id}`;
 
 export class ClientCreate extends Component {
   state = {
     additionalFields: [],
+    activeTab: 1
   };
 
   async componentDidMount() {
-    const response = await axios.get('http://localhost:4000/api/referrals_form_inputs?order=id.desc');
+    const response = await axios.get(
+      'http://localhost:4000/api/referrals_form_inputs?order=id.desc'
+    );
     const { data } = response;
     this.setState({
-      additionalFields: data,
+      additionalFields: data
+    });
+  }
+
+  switchTabs(id) {
+    this.setState({
+      activeTab: id
     });
   }
 
@@ -79,30 +88,48 @@ export class ClientCreate extends Component {
       <Create {...this.props}>
         <SimpleForm toolbar={<PostCreateToolbar />} redirect={redirect}>
           <h4>Submit New Referral</h4>
+          <div className="ClientTabs">
+            <div
+              className={`ClientTab
+              ${this.state.activeTab === 1 && 'ClientTab--selected'}`}
+              onClick={() => this.switchTabs(1)}
+            >
+              MAIN INFORMATION
+            </div>
+            <div
+              className={`ClientTab
+              ${this.state.activeTab === 2 && 'ClientTab--selected'}`}
+              onClick={() => this.switchTabs(2)}
+            >
+              ADDITIONAL INFORMATION
+            </div>
+          </div>
           {form(this.state, false)}
         </SimpleForm>
       </Create>
     );
   }
-};
+}
 
 export class ClientEdit extends Component {
   state = {
     additionalFields: [],
-    activeTab: 1,
+    activeTab: 1
   };
 
   async componentDidMount() {
-    const response = await axios.get('http://localhost:4000/api/referrals_form_inputs?order=id.desc');
+    const response = await axios.get(
+      'http://localhost:4000/api/referrals_form_inputs?order=id.desc'
+    );
     const { data } = response;
     this.setState({
-      additionalFields: data,
+      additionalFields: data
     });
   }
 
   switchTabs(id) {
     this.setState({
-      activeTab: id,
+      activeTab: id
     });
   }
 
@@ -112,17 +139,17 @@ export class ClientEdit extends Component {
         <SimpleForm toolbar={<PostCreateToolbar />} redirect={redirect}>
           <h4>{`Referral #${this.props.id}`}</h4>
           <div className="ClientTabs">
-            <div className={
-              `ClientTab
-              ${this.state.activeTab === 1 && 'ClientTab--selected'}`
-              } onClick={() => this.switchTabs(1)}
+            <div
+              className={`ClientTab
+              ${this.state.activeTab === 1 && 'ClientTab--selected'}`}
+              onClick={() => this.switchTabs(1)}
             >
               MAIN INFORMATION
             </div>
-            <div className={
-              `ClientTab
-              ${this.state.activeTab === 2 && 'ClientTab--selected'}`
-            } onClick={() => this.switchTabs(2)}
+            <div
+              className={`ClientTab
+              ${this.state.activeTab === 2 && 'ClientTab--selected'}`}
+              onClick={() => this.switchTabs(2)}
             >
               ADDITIONAL INFORMATION
             </div>
@@ -132,15 +159,14 @@ export class ClientEdit extends Component {
       </Edit>
     );
   }
-};
+}
 
 function form(state, showApprovalStatus) {
   if (state.activeTab === 1) {
-    return (
-      [
-        <TextInput source="fname" label="First Name" />,
-        <TextInput source="lname" label="Last Name" />,
-        showApprovalStatus &&
+    return [
+      <TextInput source="fname" label="First Name" />,
+      <TextInput source="lname" label="Last Name" />,
+      showApprovalStatus && (
         <SelectInput
           source="approval_status"
           choices={[
@@ -148,37 +174,34 @@ function form(state, showApprovalStatus) {
             { id: 'Approved', name: 'Approved' },
             { id: 'Rejected', name: 'Rejected' }
           ]}
-        />,
-        <TextInput source="agency_id" label="Agency" />,
-        <TextInput source="email" label="Email" />,
-        <TextInput source="phone" label="Phone Number" />,
-        <TextInput source="agent" label="Reference Agency" />,
-        <ImageInput source="image" label="Related pictures" accept="image/*">
-          <ImageField source="src" title="title" />
-        </ImageInput>,
-      ]
-    );
+        />
+      ),
+      <TextInput source="agency_id" label="Agency" />,
+      <TextInput source="email" label="Email" />,
+      <TextInput source="phone" label="Phone Number" />,
+      <TextInput source="agent" label="Reference Agency" />,
+      <ImageInput source="image" label="Related pictures" accept="image/*">
+        <ImageField source="src" title="title" />
+      </ImageInput>
+    ];
   }
-  return (
-    state.additionalFields.map((field) => {
-      const { name, id, type } = field;
-      const source = `custom_info.${id}`;
-      switch (type.trim()) {
-        case 'LongTextInput':
-          return (<LongTextInput label={name} key={source} source={source}/>);
-        case 'FileInput':
-          return (
+  return state.additionalFields.map(field => {
+    const { name, id, type } = field;
+    const source = `custom_info.${id}`;
+    switch (type.trim()) {
+      case 'LongTextInput':
+        return <LongTextInput label={name} key={source} source={source} />;
+      case 'FileInput':
+        return (
           <FileInput source={source} label={name} key={source}>
             <FileField source="src" title="title" />
           </FileInput>
         );
-        case 'BooleanInput':
-          return (<BooleanInput label={name} key={source} source={source}/>);
-        case 'TextInput':
-        default:
-          return (<TextInput label={name} key={source} source={source} />);
-      }
-    })
-  );
+      case 'BooleanInput':
+        return <BooleanInput label={name} key={source} source={source} />;
+      case 'TextInput':
+      default:
+        return <TextInput label={name} key={source} source={source} />;
+    }
+  });
 }
-
