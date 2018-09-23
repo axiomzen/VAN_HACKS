@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import Logo from './image/glassbox_logo.svg';
+import { bgImages } from './constants.js';
 
 const styles = theme => ({
   label: {
@@ -34,7 +35,11 @@ const styles = theme => ({
   },
   input: {
     display: 'none',
+    padding: '8px',
   },
+  bgImages: {
+    backgroundImage: `url(${bgImages[0]})`,
+  }
 }); 
 
 class MyLoginPage extends Component { 
@@ -71,34 +76,35 @@ class MyLoginPage extends Component {
       const { classes } = this.props;
 
         return (
-          <Fragment>
-          <div className="login_form">
-          <img src={Logo} width="240" />
-            <form onSubmit={this.submit}>
-              <div className="input_section">
-                <InputLabel className={classes.label}>Email</InputLabel>
-                <Input
-                  name="email"
-                  type={'email'}
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="input_section">
-                <InputLabel className={classes.label}>Password</InputLabel>
-                <Input
-                  name="password"
-                  type={'password'}
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                Submit
-              </Button>
-            </form>
+          <div className="login_form" styles={classes.bgImages}>
+            <div className="login-bg">
+              <img src={Logo} width="240" />
+              <form onSubmit={this.submit}>
+                <div className="input_section">
+                  <InputLabel className={classes.label}>Email</InputLabel>
+                  <Input
+                    // className={classes.input}
+                    name="email"
+                    type={'email'}
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="input_section">
+                  <InputLabel className={classes.label}>Password</InputLabel>
+                  <Input
+                    name="password"
+                    type={'password'}
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                  Submit
+                </Button>
+              </form>
+            </div>
           </div>
-          </Fragment>
         );
     }
 };
