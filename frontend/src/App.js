@@ -39,12 +39,20 @@ const App = () => (
     customRoutes={customRoutes}
     loginPage={() => <MyLoginPage authProvider={authProvider} />}
   >
+    <NavHeaderController />
     <Resource
       name="clients"
       list={ClientList}
       create={ClientCreate}
       edit={ClientEdit}
       icon={PersonIcon}
+    />
+    <Resource
+      options={{ label: 'Inventory' }}
+      name="item_inventory"
+      list={ItemList}
+      create={ItemCreate}
+      edit={ItemEdit}
     />
     <Resource
       options={{ label: 'Clients form' }}
@@ -54,16 +62,6 @@ const App = () => (
       edit={ReferralsFormFieldsEdit}
       icon={DescriptionIcon}
     />
-    <NavHeaderController />
-
-    <Resource
-      options={{ label: 'Items' }}
-      name="item_inventory"
-      list={ItemList}
-      create={ItemCreate}
-      edit={ItemEdit}
-    />
-
     <Resource
       options={{ label: 'Items types' }}
       name="item_types"
@@ -72,13 +70,11 @@ const App = () => (
       edit={ItemTypesEdit}
       icon={LabelIcon}
     />
-
     <Resource
       options={{ label: 'Item status' }}
       name="item_status"
       create={ItemStatusCreate}
     />
-
     <Resource
       name="shopping_list_items"
       options={{ label: 'Shopping lists' }}
@@ -86,11 +82,8 @@ const App = () => (
       edit={ShoppingListsEdit}
       icon={ShoppingBasketIcon}
     />
-
     <Resource name="drop_locations" />
-
     <Resource name="drop_locations" />
-
     <Resource name="agencies" />
   </Admin>
 );
