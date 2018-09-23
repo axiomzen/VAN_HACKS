@@ -15,15 +15,18 @@ import {
 } from './referralsFormFields';
 import { ItemList, ItemCreate, ItemEdit } from './items';
 
-import httpClient from './httpClient';
+// TODO: re-enable later
+// import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
 
 import './App.css';
 
-const dataProvider = postgrestProvider('/api', httpClient);
+// TODO: re-enable later
+// const dataProvider = postgrestProvider('/api', httpClient);
+const dataProvider = postgrestProvider('/api');
 
-// TODO:
+// TODO: re-enable later
 // const authProvider = createAuthClient('/api');
 const App = () => (
   <Admin
