@@ -35,12 +35,12 @@ export const ClientList = props => {
     <List {...props}>
       <Datagrid>
         <TextField source="id" />
-        <TextField source="fname" />
-        <TextField source="lname" />
+        <TextField label="First" source="fname" />
+        <TextField label="Last" source="lname" />
         <TextField source="email" />
         <TextField source="phone" />
         <TextField source="agent" />
-        <ImageField source="image.src" title="image.title" />
+        <ImageField label="Photo" source="image.src" title="image.title" />
         <ApprovalStatusField source="approval_status" />
         <EditButton basePath="/clients" />
       </Datagrid>
@@ -50,16 +50,9 @@ export const ClientList = props => {
 
 const PostCreateToolbar = props => (
   <Toolbar {...props}>
-    {/* <SaveButton
-            label="post.action.save_and_show"
-            redirect="show"
-            submitOnEnter={true}
-        /> */}
-    <SaveButton label="Submit" submitOnEnter={false} />
+    <SaveButton label="Submit" submitOnEnter={false} redirect="/confirmation" />
   </Toolbar>
 );
-
-const redirect = (basePath, id, data) => `/clients/${data.id}`;
 
 export class ClientCreate extends Component {
   state = {
@@ -86,7 +79,7 @@ export class ClientCreate extends Component {
   render() {
     return (
       <Create {...this.props}>
-        <SimpleForm toolbar={<PostCreateToolbar />} redirect={redirect}>
+        <SimpleForm toolbar={<PostCreateToolbar />}>
           <h4>Submit New Referral</h4>
           <div className="ClientTabs">
             <div
@@ -136,7 +129,7 @@ export class ClientEdit extends Component {
   render() {
     return (
       <Edit {...this.props}>
-        <SimpleForm toolbar={<PostCreateToolbar />} redirect={redirect}>
+        <SimpleForm>
           <h4>{`Referral #${this.props.id}`}</h4>
           <div className="ClientTabs">
             <div
