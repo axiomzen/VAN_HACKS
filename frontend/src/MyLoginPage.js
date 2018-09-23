@@ -9,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import Logo from './image/glassbox_logo.svg';
 import { bgImages } from './constants.js';
-
+const images = [...bgImages];
 const styles = theme => ({
   label: {
     width: "4rem",
@@ -37,17 +37,38 @@ const styles = theme => ({
     display: 'none',
     padding: '8px',
   },
-  bgImages: {
-    backgroundImage: `url(${bgImages[0]})`,
+  backgroundStyle: {
+    // backgroundImage: `url(${images[0]})`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    height: '100vh',
+    transition: "all 2s",
+    backgroundSize: 'cover',
+    backgroundColor: '#80CCFF',
+    backgroundBlendMode: 'luminosity',
+    backgroundRepeat: 'no-repeat',
   }
 }); 
+
 
 class MyLoginPage extends Component { 
   state = {
     email: '',
     password: '',
+    bgIndex: 0,
   };
 
+  componentDidMount() {
+    this.handleChangeBg()
+  }
+  handleChangeBg= () => { setInterval(() => {
+    this.setState({
+      bgIndex: this.state.bgIndex === images.length - 1 ? 0 : this.state.bgIndex + 1
+      });
+    }, 4000);
+  }
   handleChange = event => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
@@ -74,7 +95,7 @@ class MyLoginPage extends Component {
     render() {
       const { classes } = this.props;
       return (
-        <div className="login_form" styles={classes.bgImages}>
+        <div className={classes.backgroundStyle} style={{backgroundImage: `url(${images[this.state.bgIndex]})`}}>
           <div className="login-bg">
             <img src={Logo} width="240" />
             <form onSubmit={this.submit}>
