@@ -40,12 +40,6 @@ const pool = new pg.Pool(dbConfig);
 async function findMatch(typeId) {
   const client = await pool.connect()
 
-  // TODO:
-  // - join with status
-  // - exclude item which have status
-  // - order by priority
-  // - limit one
-
   const res = await client.query(`
   SELECT 
   item_inventory.id as inv_id, shopping_list_items.id as list_id
@@ -53,11 +47,19 @@ FROM item_inventory
 INNER JOIN shopping_list_items
   ON shopping_list_items.item_type = item_inventory.item_type
 LEFT JOIN item_status ON item_status.shopping_list_item_id = shopping_list_items.id
-WHERE item_status.status IS NULL AND item_inventory.item_type = 1
+WHERE item_status.status IS NULL AND item_inventory.item_type = $1
 ORDER BY shopping_list_items.item_priority
 LIMIT 1;
-    `
+    `, [typeId]
   )
+  
+  if (res.rows.length > 0){
+    const res = await client.query(`
+    INSERT INTO item_status (status, item_inventory_id, shopping_list_item_id)
+    VALUES ('matched', $1, $2);
+      `, [res.rows[0].inv_id, res.rows[0].list_id]
+    )
+  }
   console.log("!!!", res.rows)
 }
 
@@ -84,7 +86,7 @@ app.use('/', proxy(process.env.POSTGREST_HOST, {
         findMatch(response.item_type)
       }
     }
-
+    //Add notification trigger
     return proxyResData
   }
 }));
