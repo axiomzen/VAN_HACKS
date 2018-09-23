@@ -13,20 +13,6 @@ INSERT INTO shopping_list_items (id, item_priority, client_id, item_type)
 VALUES (1, 10, 1, 1),(2, 4, 2, 1),(3, 9, 2, 3);
 
 
-CREATE TABLE IF NOT EXISTS item_inventory (
-  id SERIAL PRIMARY KEY,
-  item_type INTEGER,
-  item_labels JSONB,
-  item_status INTEGER,
-  image JSONB,
-  donor_email TEXT,
-  location_id INTEGER,
-  added_by TEXT NOT NULL,
-  FOREIGN KEY (item_type) REFERENCES item_types(id),
-  FOREIGN KEY (item_status) REFERENCES item_status(id),
-  FOREIGN KEY (location_id) REFERENCES drop_locations(id)
-);
-
 INSERT INTO item_inventory (id, item_type, image, donor_email, added_by)
 VALUES 
 (1, 1, '{}', 'jimmy4@hotmail.com', 'Samantha H'), 

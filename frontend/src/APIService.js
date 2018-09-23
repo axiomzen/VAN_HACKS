@@ -10,7 +10,7 @@ export const fetchShoppingListItems = clientId =>
 export const submitShoppingListItem = (clientId, itemCategory) => {
   const data = {
     client_id: clientId,
-    item_type: itemCategory
+    item_category: itemCategory
   };
   return fetch('http://localhost:3000/shopping_list_items', {
     method: 'POST',
