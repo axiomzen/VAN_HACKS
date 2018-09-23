@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS item_status(
   id SERIAL PRIMARY KEY,
   msg TEXT,
   shared boolean,
-  status TEXT NOT NULL,
+  status TEXT DEFAULT 'in-stock',
   updated_at DATE DEFAULT CURRENT_DATE,
   item_inventory_id INTEGER,
   shopping_list_item_id INTEGER,

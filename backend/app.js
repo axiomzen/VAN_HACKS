@@ -52,15 +52,13 @@ ORDER BY shopping_list_items.item_priority
 LIMIT 1;
     `, [typeId]
   )
-  
   if (res.rows.length > 0){
-    const res = await client.query(`
+    res2 = await client.query(`
     INSERT INTO item_status (status, item_inventory_id, shopping_list_item_id)
     VALUES ('matched', $1, $2);
       `, [res.rows[0].inv_id, res.rows[0].list_id]
     )
   }
-  console.log("!!!", res.rows)
 }
 
 const matchingEndpoints = new Set(['/item_inventory', '/shopping_list_items'])
