@@ -11,11 +11,13 @@ import customRoutes from './customRoutes';
 import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
 const dataProvider = postgrestProvider('/api', httpClient);
 
-const authProvider = createAuthClient('/api');
+// TODO:
+// const authProvider = createAuthClient('/api');
 const App = () => (
   <Admin
     dataProvider={dataProvider}
-    authProvider={authProvider}
+    // TODO: re-enable later
+    // authProvider={authProvider}
     customRoutes={customRoutes}
   >
     <Resource
