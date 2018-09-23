@@ -13,44 +13,79 @@ import {
   ReferralsFormFieldsCreate,
   ReferralsFormFieldsEdit
 } from './referralsFormFields';
-import httpClient from './httpClient';
+import { ItemList, ItemCreate, ItemEdit } from './items';
+
+// TODO: re-enable later
+// import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 import NavHeaderController from './NavHeaderController';
+import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
 
 import './App.css';
 
-const dataProvider = postgrestProvider('/api', httpClient);
-const authProvider = createAuthClient('/api');
-const App = () => {
-  return (
-    <Admin
-      dataProvider={dataProvider}
-      authProvider={authProvider}
-      customRoutes={customRoutes}
-    >
-      <NavHeaderController />
-      <Resource
-        options={{label: 'Clients form'}}
-        name="referrals_form_inputs"
-        list={ReferralsFormFieldsList}
-        create={ReferralsFormFieldsCreate}
-        edit={ReferralsFormFieldsEdit}
+// TODO: re-enable later
+// const dataProvider = postgrestProvider('/api', httpClient);
+const dataProvider = postgrestProvider('/api');
+
+// TODO: re-enable later
+// const authProvider = createAuthClient('/api');
+const App = () => (
+  <Admin
+    dataProvider={dataProvider}
+    // TODO: re-enable later
+    // authProvider={authProvider}
+    customRoutes={customRoutes}
+  >
+    <NavHeaderController />
+    <Resource
+      options={{ label: 'Clients form' }}
+      name="referrals_form_inputs"
+      list={ReferralsFormFieldsList}
+      create={ReferralsFormFieldsCreate}
+      edit={ReferralsFormFieldsEdit}
+    />
+    <Resource
+      name="clients"
+      list={ClientList}
+      create={ClientCreate}
+      edit={ClientEdit}
+    />
+
+    <Resource
+
+      options={{label: "Items"}}
+      name="item_inventory"
+      list={ItemList}
+      create={ItemCreate}
+      edit={ItemEdit}
+    />
+
+    <Resource
+      options={{label: "Items types"}}
+      name="item_types"
+      list={ItemTypesList}
+      create={ItemTypesCreate}
+      edit={ItemTypesEdit}
       />
-      <Resource
-        name="clients"
-        list={ClientList}
-        create={ClientCreate}
-        edit={ClientEdit}
+
+    <Resource
+      name="item_status"/>
+
+    <Resource
+      name="shopping_list_items"
+      options={{ label: 'Shopping lists' }}
+      list={ShoppingListsList}
+      create={ShoppingListsCreate}
+      edit={ShoppingListsEdit}
       />
-      <Resource
-        options={{label: 'Shopping lists'}}
-        name="shopping_list_items"
-        list={ShoppingListsList}
-        create={ShoppingListsCreate}
-        edit={ShoppingListsEdit}
-      />
-    </Admin>
-  );
-};
+
+    <Resource
+      name="drop_locations"/>
+
+    <Resource
+      name="agencies"/>
+
+  </Admin>
+);
 
 export default App;
