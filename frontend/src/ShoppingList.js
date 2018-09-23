@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 import {
   fetchItemTypes,
   submitShoppingListItem,
@@ -60,26 +66,29 @@ class ShoppingList extends Component {
           <CardContent>
             <form className="" autoComplete="off">
               <div>
-                <select
+                <Select
                   name="carlist"
                   form="carform"
                   onChange={this.handleChange}
+                  value={this.state.selectedItemType || 'TEST'}
                 >
-                  <option value="">Select Item Type</option>
+                  <MenuItem value="TEST">Select Item Type</MenuItem>
                   {this.state.itemTypes.map(({ item_category, id }) => (
-                    <option key={item_category} value={id}>
+                    <MenuItem key={item_category} value={id}>
                       {item_category}
-                    </option>
+                    </MenuItem>
                   ))}
-                </select>
+                </Select>
               </div>
               <div>
-                <label>Add Details</label>
-              </div>
-              <div>
-                <button type="button" onClick={this.submitItem}>
+                <Button
+                  type="button"
+                  variant="raised"
+                  color="primary"
+                  onClick={this.submitItem}
+                >
                   Add Item To list
-                </button>
+                </Button>
               </div>
             </form>
           </CardContent>
@@ -87,14 +96,25 @@ class ShoppingList extends Component {
         <Card>
           <CardHeader title="Existing Wish List" />
           <CardContent>
-            {this.state.shoppingList.map(item => {
-              const type = this.state.itemTypes[item.item_type - 1];
-              return (
-                <div key={item.id}>{type ? type.item_category : '??'}</div>
-              );
-            })}
+            <List>
+              {this.state.shoppingList.map(item => {
+                const type = this.state.itemTypes[item.item_type - 1];
+                return (
+                  <ListItem key={item.id}>
+                    {type ? type.item_category : '??'}
+                  </ListItem>
+                );
+              })}
+            </List>
             <div>
-              <button>Submit Wish List</button>
+              <Button
+                type="button"
+                variant="raised"
+                color="primary"
+                onClick={() => {}}
+              >
+                Submit Wish List
+              </Button>
             </div>
           </CardContent>
         </Card>
