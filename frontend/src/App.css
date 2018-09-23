@@ -112,5 +112,7 @@ div[class^='FormInput-input-'] {
   margin-top: 50px;
 }
 
-.confirmation img {
+.referral {
+  width: 50%;
+  margin: auto;
 }

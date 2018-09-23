@@ -60,7 +60,7 @@ export const ItemCreate = props => (
         <SelectInput optionText="status"/>
       </ReferenceInput>
       */}
-      <TextInput source="added_by" required={true} />
+      <TextInput source="added_by" required={true} defaultValue="Tom Willis" />
     </SimpleForm>
   </Create>
 );

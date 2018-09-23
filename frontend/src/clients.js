@@ -79,26 +79,28 @@ export class ClientCreate extends Component {
   render() {
     return (
       <Create {...this.props}>
-        <SimpleForm toolbar={<PostCreateToolbar />}>
-          <h4>Submit New Referral</h4>
-          <div className="ClientTabs">
-            <div
-              className={`ClientTab
+        <div className="referral">
+          <SimpleForm toolbar={<PostCreateToolbar />}>
+            <h4>Submit New Referral</h4>
+            <div className="ClientTabs">
+              <div
+                className={`ClientTab
               ${this.state.activeTab === 1 && 'ClientTab--selected'}`}
-              onClick={() => this.switchTabs(1)}
-            >
-              MAIN INFORMATION
-            </div>
-            <div
-              className={`ClientTab
+                onClick={() => this.switchTabs(1)}
+              >
+                MAIN INFORMATION
+              </div>
+              <div
+                className={`ClientTab
               ${this.state.activeTab === 2 && 'ClientTab--selected'}`}
-              onClick={() => this.switchTabs(2)}
-            >
-              ADDITIONAL INFORMATION
+                onClick={() => this.switchTabs(2)}
+              >
+                ADDITIONAL INFORMATION
+              </div>
             </div>
-          </div>
-          {form(this.state, false)}
-        </SimpleForm>
+            {form(this.state, false)}
+          </SimpleForm>
+        </div>
       </Create>
     );
   }
@@ -157,10 +159,23 @@ export class ClientEdit extends Component {
 function form(state, showApprovalStatus) {
   if (state.activeTab === 1) {
     return [
-      <TextInput source="fname" label="First Name" defaultValue="Linda" />,
-      <TextInput source="lname" label="Last Name" defaultValue="Johnson" />,
+      <TextInput
+        source="fname"
+        label="First Name"
+        defaultValue="Linda"
+        fullWidth
+        key={0}
+      />,
+      <TextInput
+        source="lname"
+        label="Last Name"
+        defaultValue="Johnson"
+        fullWidth
+        key={1}
+      />,
       showApprovalStatus && (
         <SelectInput
+          key={2}
           source="approval_status"
           choices={[
             { id: 'Pending', name: 'Pending' },
@@ -169,23 +184,41 @@ function form(state, showApprovalStatus) {
           ]}
         />
       ),
-      <TextInput source="agency_id" label="Agency" defaultValue="1" />,
+      <TextInput
+        source="agency_id"
+        label="Agency"
+        defaultValue="1"
+        fullWidth
+        key={3}
+      />,
       <TextInput
         source="email"
         label="Email"
         defaultValue="l.johnson.@gmail.com"
+        fullWidth
+        key={4}
       />,
       <TextInput
         source="phone"
         label="Phone Number"
         defaultValue="555-345-2323"
+        fullWidth
+        key={5}
       />,
       <TextInput
         source="agent"
         label="Reference Agency"
         defaultValue="B.C.M.A"
+        fullWidth
+        key={6}
       />,
-      <ImageInput source="image" label="Related pictures" accept="image/*">
+      <ImageInput
+        source="image"
+        label="Related pictures"
+        accept="image/*"
+        fullWidth
+        key={7}
+      >
         <ImageField source="src" title="title" />
       </ImageInput>
     ];
