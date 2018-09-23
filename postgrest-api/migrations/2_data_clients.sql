@@ -6,7 +6,13 @@ INSERT INTO agencies
 VALUES (1, '{}', null, '778-331-4500', null, 'http://www.vacfss.com/programs/child-protection/', 'Aboriginal Child Protection Agency East Vancouver'), (2, '{}', null, '604-253-4044', null, 'UGM.ca', 'Union Gospel Mission'), (3, '{}', null, '604-895-5849', null, 'singlemothers@ywcavan.org', 'YWCA Single Mother’s Support Services'), (4, '{}', null, '604-872-7676', null, 'http://salvationarmyvcfs.com/', 'Salvation Army');
 
 INSERT INTO clients
-VALUES (2, 'Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 'Pending', 1);
+VALUES (1, 'Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 'Pending', 1);
+
+INSERT INTO shopping_list_items
+VALUES (1, '{}', 10, null, 1, 1),(2, '{}', 4, null, 1, 2),(3, '{}', 6, null, 1, 3);
+
+INSERT INTO item_inventory
+VALUES (1, 1, '{}', null, '{}', 'jimmy4@hotmail.com', null, 'Samantha H');
 
 INSERT INTO referrals_form_inputs
 VALUES (1, 'First name', 'shortAnswer', 'FALSE');

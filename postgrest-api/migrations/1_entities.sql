@@ -53,9 +53,9 @@ CREATE TABLE IF NOT EXISTS drop_locations(
 CREATE TABLE IF NOT EXISTS item_status(
   id SERIAL PRIMARY KEY,
   msg TEXT,
-  image JSONB,
+  shared boolean,
   status TEXT NOT NULL,
-  updated_at DATE,
+  updated_at DATE DEFAULT CURRENT_DATE,
   item_inventory_id INTEGER,
   shopping_list_item_id INTEGER,
   FOREIGN KEY (shopping_list_item_id) REFERENCES shopping_list_items(id)
