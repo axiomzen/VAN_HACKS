@@ -76,7 +76,14 @@ export const ClientEdit = props => (
       <DisabledInput source="id" />
       <LongTextInput source="fname" />
       <LongTextInput source="lname" />
-      <LongTextInput source="agency_id" />
+      <SelectInput
+        source="approval_status"
+        choices={[
+          { id: 'Pending', name: 'Pending' },
+          { id: 'Approved', name: 'Approved' },
+          { id: 'Rejected', name: 'Rejected' }
+        ]}
+      />
     </SimpleForm>
   </Edit>
 );
