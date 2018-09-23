@@ -1,21 +1,15 @@
 import React from 'react';
 import {
-  Filter,
   List,
   Edit,
   Create,
   Datagrid,
-  ReferenceField,
   TextField,
   EditButton,
   DisabledInput,
-  LongTextInput,
   ReferenceInput,
   SelectInput,
   SimpleForm,
-  TextInput,
-  Toolbar,
-  SaveButton,
   AutocompleteInput
 } from 'react-admin';
 

@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS item_types (
 CREATE TABLE IF NOT EXISTS agencies (
   id SERIAL PRIMARY KEY,
   image JSONB,
-  email TEXT NOT NULL,
-  phone TEXT NOT NULL,
+  email TEXT,
+  phone TEXT,
   address TEXT,
+  website TEXT,
   agency TEXT NOT NULL
 );
 
@@ -23,7 +24,6 @@ CREATE TABLE IF NOT EXISTS clients (
   id SERIAL PRIMARY KEY,
   lname TEXT NOT NULL,
   fname TEXT NOT NULL,
-  shopping_list JSONB,
   email TEXT,
   phone TEXT,
   custom_info JSONB,
@@ -42,7 +42,7 @@ CREATE TABLE shopping_list_items (
 	date_requested DATE DEFAULT CURRENT_DATE,
   client_id INTEGER,
   FOREIGN KEY (client_id) REFERENCES clients (id)
-	);
+);
 
 CREATE TABLE IF NOT EXISTS drop_locations(
   id SERIAL PRIMARY KEY,
@@ -73,4 +73,11 @@ CREATE TABLE IF NOT EXISTS item_inventory (
   FOREIGN KEY (item_type) REFERENCES item_types(id),
   FOREIGN KEY (item_status) REFERENCES item_status(id),
   FOREIGN KEY (location_id) REFERENCES shopping_list_items(id)
+);
+
+CREATE TABLE IF NOT EXISTS referrals_form_inputs (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  type TEXT NOT NULL,
+  optional BOOLEAN
 );

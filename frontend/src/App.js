@@ -1,14 +1,26 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
 import postgrestProvider from './postgrestProvider';
-
 import createAuthClient from './authClient';
 import { ClientList, ClientCreate, ClientEdit } from './clients';
+import {
+  ShoppingListsList,
+  ShoppingListsCreate,
+  ShoppingListsEdit
+} from './shoppingLists';
+import {
+  ReferralsFormFieldsList,
+  ReferralsFormFieldsCreate,
+  ReferralsFormFieldsEdit
+} from './referralsFormFields';
 import { ItemList, ItemCreate, ItemEdit } from './items';
 
 import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
+
+import './App.css';
+
 const dataProvider = postgrestProvider('/api', httpClient);
 
 // TODO:
@@ -21,6 +33,13 @@ const App = () => (
     customRoutes={customRoutes}
   >
     <Resource
+      options={{ label: 'Clients form' }}
+      name="referrals_form_inputs"
+      list={ReferralsFormFieldsList}
+      create={ReferralsFormFieldsCreate}
+      edit={ReferralsFormFieldsEdit}
+    />
+    <Resource
       name="clients"
       list={ClientList}
       create={ClientCreate}
@@ -28,6 +47,7 @@ const App = () => (
     />
 
     <Resource
+
       options={{label: "Items"}}
       name="item_inventory"
       list={ItemList}
@@ -47,7 +67,12 @@ const App = () => (
       name="item_status"/>
 
     <Resource
-      name="shopping_list_items"/>
+      name="shopping_list_items"
+      options={{ label: 'Shopping lists' }}
+      list={ShoppingListsList}
+      create={ShoppingListsCreate}
+      edit={ShoppingListsEdit}
+      />
 
     <Resource
       name="drop_locations"/>

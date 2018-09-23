@@ -7,16 +7,22 @@ import {
   Datagrid,
   ReferenceField,
   TextField,
+  DateInput,
   EditButton,
   DisabledInput,
   LongTextInput,
   ReferenceInput,
   SelectInput,
+  SelectField,
   SimpleForm,
   TextInput,
   Toolbar,
-  SaveButton
+  SaveButton,
+  ImageField,
+  ImageInput
 } from 'react-admin';
+
+import ApprovalStatusField from './ApprovalStatusField';
 
 export const ClientList = props => (
   <List {...props}>
@@ -24,6 +30,11 @@ export const ClientList = props => (
       <TextField source="id" />
       <TextField source="fname" />
       <TextField source="lname" />
+      <TextField source="email" />
+      <TextField source="phone" />
+      <TextField source="agent" />
+      <ImageField source="image.src" title="image.title" />
+      <ApprovalStatusField source="approval_status" />
       <EditButton basePath="/client" />
     </Datagrid>
   </List>
@@ -48,9 +59,13 @@ export const ClientCreate = props => (
       <h4>Submit New Referral</h4>
       <TextInput source="fname" label="First Name" />
       <TextInput source="lname" label="Last Name" />
+      <TextInput source="agency_id" label="Agency" />
       <TextInput source="email" label="Email" />
       <TextInput source="phone" label="Phone Number" />
-      <TextInput source="photo" label="Photo (url)" />
+      <TextInput source="agent" label="Reference Agency" />
+      <ImageInput source="image" label="Related pictures" accept="image/*">
+        <ImageField source="src" title="title" />
+      </ImageInput>
     </SimpleForm>
   </Create>
 );
@@ -61,6 +76,7 @@ export const ClientEdit = props => (
       <DisabledInput source="id" />
       <LongTextInput source="fname" />
       <LongTextInput source="lname" />
+      <LongTextInput source="agency_id" />
     </SimpleForm>
   </Edit>
 );
