@@ -39,7 +39,6 @@ const App = () => (
     customRoutes={customRoutes}
     loginPage={() => <MyLoginPage authProvider={authProvider} />}
   >
-    <NavHeaderController />
     <Resource
       name="clients"
       list={ClientList}
@@ -47,6 +46,7 @@ const App = () => (
       edit={ClientEdit}
       icon={PersonIcon}
     />
+    <NavHeaderController />
     <Resource
       options={{ label: 'Inventory' }}
       name="item_inventory"
