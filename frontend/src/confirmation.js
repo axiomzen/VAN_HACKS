@@ -1,9 +1,12 @@
 import React from 'react';
+import CheckIcon from './image/check_icon.svg';
+import Button from 'react-admin';
 
 const Confirmation = props => (
   <div className="confirmation">
-    <div>Thank you for your submision!</div>
-    <div>You will be contacted soon with an update</div>
+    <img src={CheckIcon} width="100" />
+    <h1>Thank you for your submision!</h1>
+    <div>Our staff will send you with an update as soon as we have the items in need!</div>
   </div>
 );
 
