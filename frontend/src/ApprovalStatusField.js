@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ApprovalStatus = ({ source, record = {} }) => {
-  const status = record[source].toUpperCase();
+  let status = record[source] || 'pending';
+  status = status.toUpperCase();
   let className = '';
   switch (status) {
     case 'PENDING':
