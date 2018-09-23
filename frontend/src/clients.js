@@ -157,8 +157,8 @@ export class ClientEdit extends Component {
 function form(state, showApprovalStatus) {
   if (state.activeTab === 1) {
     return [
-      <TextInput source="fname" label="First Name" />,
-      <TextInput source="lname" label="Last Name" />,
+      <TextInput source="fname" label="First Name" defaultValue="Linda" />,
+      <TextInput source="lname" label="Last Name" defaultValue="Johnson" />,
       showApprovalStatus && (
         <SelectInput
           source="approval_status"
@@ -169,10 +169,22 @@ function form(state, showApprovalStatus) {
           ]}
         />
       ),
-      <TextInput source="agency_id" label="Agency" />,
-      <TextInput source="email" label="Email" />,
-      <TextInput source="phone" label="Phone Number" />,
-      <TextInput source="agent" label="Reference Agency" />,
+      <TextInput source="agency_id" label="Agency" defaultValue="1" />,
+      <TextInput
+        source="email"
+        label="Email"
+        defaultValue="l.johnson.@gmail.com"
+      />,
+      <TextInput
+        source="phone"
+        label="Phone Number"
+        defaultValue="555-345-2323"
+      />,
+      <TextInput
+        source="agent"
+        label="Reference Agency"
+        defaultValue="B.C.M.A"
+      />,
       <ImageInput source="image" label="Related pictures" accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>
