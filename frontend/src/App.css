@@ -48,17 +48,17 @@
   display: none !important;
 }
 
-.NavHeaderHidden div[class^="MuiDrawer-docked-"] {
+.NavHeaderHidden div[class^='MuiDrawer-docked-'] {
   display: none !important;
 }
 
 @media (min-width: 0px) {
-  .NavHeaderHidden div[class^="Layout-content-"] {
+  .NavHeaderHidden div[class^='Layout-content-'] {
     padding-left: 24px;
   }
 }
 
-div[class^="FormInput-input-"] {
+div[class^='FormInput-input-'] {
   width: 100% !important;
 }
 
@@ -74,7 +74,7 @@ div[class^="FormInput-input-"] {
   max-width: 264px;
   min-width: 72px;
   font-size: 0.875rem;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
@@ -85,3 +85,21 @@ div[class^="FormInput-input-"] {
   border-bottom: 2px solid #3f4ebc;
 }
 
+.form {
+  display: flex;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.add-item {
+  display: flex;
+}
+
+.item {
+  border-bottom: solid 1px grey;
+}
+
+.mg {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

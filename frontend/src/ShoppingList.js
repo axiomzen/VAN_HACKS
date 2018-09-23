@@ -60,11 +60,11 @@ class ShoppingList extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="form">
         <Card>
-          <CardHeader title="Add Items to Wish List" />
+          <CardHeader title="Wish List" />
           <CardContent>
-            <form className="" autoComplete="off">
+            <form className="add-item" autoComplete="off">
               <div>
                 <Select
                   name="carlist"
@@ -86,27 +86,26 @@ class ShoppingList extends Component {
                   variant="raised"
                   color="primary"
                   onClick={this.submitItem}
+                  size="small"
+                  variant="flat"
                 >
-                  Add Item To list
+                  Add To list
                 </Button>
               </div>
             </form>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader title="Existing Wish List" />
-          <CardContent>
-            <List>
+            <div className="mg">
               {this.state.shoppingList.map(item => {
                 const type = this.state.itemTypes[item.item_type - 1];
                 return (
-                  <ListItem key={item.id}>
-                    {type ? type.item_category : '??'}
-                  </ListItem>
+                  <div className="item">
+                    <ListItem key={item.id}>
+                      {type ? type.item_category : '??'}
+                    </ListItem>
+                  </div>
                 );
               })}
-            </List>
-            <div>
+            </div>
+            <div className="mg">
               <Button
                 type="button"
                 variant="raised"
