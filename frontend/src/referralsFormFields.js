@@ -32,7 +32,7 @@ export const ReferralsFormFieldsList = props => (
       <TextField source="id" />
       <TextField source="name" />
       <SelectField source="type" choices={inputTypes} />
-      <BooleanField source="optional" />
+      {/*<BooleanField source="optional" />*/}
       <EditButton basePath="/referrals_form_inputs" />
     </Datagrid>
   </List>
@@ -43,7 +43,7 @@ export const ReferralsFormFieldsCreate = props => (
     <SimpleForm>
       <TextInput label="Label name" source="name" />
       <SelectInput label="Type" source="type" choices={inputTypes} />
-      <BooleanInput label="Optional" source="optional" />
+      {/*<BooleanInput label="Optional" source="optional" />*/}
     </SimpleForm>
   </Create>
 );
@@ -53,7 +53,7 @@ export const ReferralsFormFieldsEdit = props => (
     <SimpleForm>
       <TextInput label="Label name" source="name" />
       <SelectInput label="Type" source="type" choices={inputTypes} />
-      <BooleanInput label="Optional" source="optional" />
+      {/*<BooleanInput label="Optional" source="optional" />*/}
     </SimpleForm>
   </Edit>
 );

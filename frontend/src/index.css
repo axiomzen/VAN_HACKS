@@ -12,9 +12,10 @@ body .Login-main-1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 100vh;
+}
 
-  form {
-    
-  }
+.login_form img {
+  margin-bottom: 2rem;
 }

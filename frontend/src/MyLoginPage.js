@@ -1,16 +1,60 @@
 // in src/MyLoginPage.js
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { userLogin } from 'admin-on-rest';
 import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
+import Logo from './image/glassbox_logo.svg';
 
-class MyLoginPage extends Component {
+const styles = theme => ({
+  label: {
+    width: "4rem",
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  dense: {
+    marginTop: 19,
+  },
+  menu: {
+    width: 200,
+  },
+  button: {
+    margin: theme.spacing.unit,
+    width: "100%"
+  },
+  input: {
+    display: 'none',
+  },
+}); 
+
+class MyLoginPage extends Component { 
+  state = {
+    email: '',
+    password: '',
+  };
+
+  handleChange = event => {
+    const { value, name } = event.target;
+    this.setState({ [name]: value });
+  };
+
     submit = async (e) => {
         e.preventDefault();
         // gather your data/credentials here
+        const { email, password } = this.state;
         const credentials = {
-          username: 'demo@example.org',
-          password: 'demo',
+          username: email,
+          password: password,
         };
 
         // Dispatch the userLogin action (injected by connect)
@@ -23,31 +67,40 @@ class MyLoginPage extends Component {
     }
 
     render() {
+
+      const { classes } = this.props;
+
         return (
+          <Fragment>
           <div className="login_form">
+          <img src={Logo} width="240" />
             <form onSubmit={this.submit}>
               <div className="input_section">
-                <label>Email:</label>
-                <input type="email" name="email" />
+                <InputLabel className={classes.label}>Email</InputLabel>
+                <Input
+                  name="email"
+                  type={'email'}
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
               </div>
               <div className="input_section">
-                <label>password:</label>
-                <input type="password" name="password" />
-                <button>Submit</button>
+                <InputLabel className={classes.label}>Password</InputLabel>
+                <Input
+                  name="password"
+                  type={'password'}
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
               </div>
+              <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                Submit
+              </Button>
             </form>
           </div>
+          </Fragment>
         );
     }
 };
 
-export default withRouter(connect(undefined, { userLogin })(MyLoginPage));
-
-// // in src/MyLogoutButton.js
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { userLogout } from 'admin-on-rest';
-
-// const MyLogoutButton = ({ userLogout }) => (
-//     <button onClick={userLogout}>Logout</button>
-// );
+export default withStyles(styles)(withRouter(connect(undefined, { userLogin })(MyLoginPage)));
