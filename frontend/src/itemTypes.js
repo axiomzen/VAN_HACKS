@@ -1,22 +1,14 @@
 import React from 'react';
 import {
-  Filter,
   List,
   Edit,
   Create,
   Datagrid,
-  ReferenceField,
   TextField,
   EditButton,
   DisabledInput,
-  LongTextInput,
-  ReferenceInput,
-  SelectInput,
   SimpleForm,
-  TextInput,
-  Toolbar,
-  SaveButton,
-  AutocompleteInput
+  TextInput
 } from 'react-admin';
 
 export const ItemTypesList = props => (
@@ -33,7 +25,7 @@ export const ItemTypesList = props => (
 export const ItemTypesCreate = props => (
   <Create {...props} title="Create item type">
     <SimpleForm>
-      <TextInput source="item_category" />
+      <TextInput source="item_category" required={true}/>
       <TextInput source="description" />
     </SimpleForm>
   </Create>
@@ -43,7 +35,7 @@ export const ItemTypesEdit = props => (
   <Edit {...props} title="Edit item type">
     <SimpleForm>
       <DisabledInput source="id" />
-      <TextInput source="item_category" />
+      <TextInput source="item_category" required={true} />
       <TextInput source="description" />
     </SimpleForm>
   </Edit>
