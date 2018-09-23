@@ -7,11 +7,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import LabelIcon from '@material-ui/icons/Label';
 import { ClientList, ClientCreate, ClientEdit } from './clients';
-import {
-  ShoppingListsList,
-  ShoppingListsCreate,
-  ShoppingListsEdit
-} from './shoppingLists';
+import { ShoppingListsList, ShoppingListsEdit } from './shoppingLists';
 import {
   ReferralsFormFieldsList,
   ReferralsFormFieldsCreate,
@@ -20,25 +16,28 @@ import {
 import { ItemList, ItemCreate, ItemEdit } from './items';
 
 // TODO: re-enable later
-// import httpClient from './httpClient';
+import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 import NavHeaderController from './NavHeaderController';
-import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
+import { ItemTypesCreate, ItemTypesEdit, ItemTypesList } from './itemTypes';
+import {ItemStatusCreate} from "./itemStatus";
 
 import './App.css';
+import MyLoginPage from './MyLoginPage';
 
 // TODO: re-enable later
-// const dataProvider = postgrestProvider('/api', httpClient);
-const dataProvider = postgrestProvider('/api');
+const dataProvider = postgrestProvider('/api', httpClient);
+// const dataProvider = postgrestProvider('/api');
 
 // TODO: re-enable later
-// const authProvider = createAuthClient('/api');
+const authProvider = createAuthClient('/api');
 const App = () => (
   <Admin
     dataProvider={dataProvider}
     // TODO: re-enable later
-    // authProvider={authProvider}
+    authProvider={authProvider}
     customRoutes={customRoutes}
+    loginPage={() => <MyLoginPage authProvider={authProvider}/>}
   >
     <NavHeaderController />
     <Resource
@@ -58,7 +57,6 @@ const App = () => (
     />
 
     <Resource
-
       options={{label: "Items"}}
       name="item_inventory"
       list={ItemList}
@@ -67,32 +65,33 @@ const App = () => (
     />
 
     <Resource
-      options={{label: "Items types"}}
+      options={{ label: 'Items types' }}
       name="item_types"
       list={ItemTypesList}
       create={ItemTypesCreate}
       edit={ItemTypesEdit}
       icon={LabelIcon}
-      />
+    />
 
     <Resource
-      name="item_status"/>
+      options={{label: "Item status"}}
+      name="item_status"
+      create={ItemStatusCreate}
+    />
 
     <Resource
       name="shopping_list_items"
       options={{ label: 'Shopping lists' }}
       list={ShoppingListsList}
-      create={ShoppingListsCreate}
       edit={ShoppingListsEdit}
       icon={ShoppingBasketIcon}
-      />
+    />
 
-    <Resource
-      name="drop_locations"/>
+    <Resource name="drop_locations" />
 
-    <Resource
-      name="agencies"/>
+    <Resource name="drop_locations" />
 
+    <Resource name="agencies" />
   </Admin>
 );
 

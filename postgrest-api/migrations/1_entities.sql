@@ -35,10 +35,10 @@ CREATE TABLE IF NOT EXISTS item_types (
 );
 
 CREATE TABLE shopping_list_items (
-  id SERIAL PRIMARY KEY,
-  item_labels JSONB,
-  item_priority INTEGER,
-  date_requested DATE DEFAULT CURRENT_DATE,
+  id SERIAL PRIMARY KEY, 
+  item_labels JSONB, 
+  item_priority INTEGER,
+  date_requested DATE DEFAULT CURRENT_DATE,
   client_id INTEGER,
   item_type INTEGER,
   FOREIGN KEY (client_id) REFERENCES clients (id),
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS referrals_form_inputs (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   type TEXT NOT NULL,
-  optional BOOLEAN
+  optional BOOLEAN DEFAULT false
 );
 
 ALTER TABLE item_status ADD CONSTRAINT fkey FOREIGN KEY (item_inventory_id) REFERENCES item_inventory(id);
