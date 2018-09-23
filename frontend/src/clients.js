@@ -189,30 +189,35 @@ function form(state, showApprovalStatus) {
         label="Agency"
         defaultValue="1"
         fullWidth
+        key={3}
       />,
       <TextInput
         source="email"
         label="Email"
         defaultValue="l.johnson.@gmail.com"
         fullWidth
+        key={4}
       />,
       <TextInput
         source="phone"
         label="Phone Number"
         defaultValue="555-345-2323"
         fullWidth
+        key={5}
       />,
       <TextInput
         source="agent"
         label="Reference Agency"
         defaultValue="B.C.M.A"
         fullWidth
+        key={6}
       />,
       <ImageInput
         source="image"
         label="Related pictures"
         accept="image/*"
         fullWidth
+        key={7}
       >
         <ImageField source="src" title="title" />
       </ImageInput>
