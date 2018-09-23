@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Logo from './image/glassbox_logo.svg';
 
 class Pickup extends Component {
   render() {
     return (
-      <div>
-        <div>Your Wish list has been approved and is ready for pickup!</div>
-        <div>Please visit us to reveice your item(s)</div>
+      <div className="confirmation">
+        <img src={Logo} width="240" />
+        <h2>Your Wish list has been approved and is ready for pickup!</h2>
+        <div>Please visit us to receive your item(s)</div>
       </div>
     );
   }
