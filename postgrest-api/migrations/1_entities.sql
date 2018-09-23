@@ -29,18 +29,19 @@ CREATE TABLE IF NOT EXISTS clients (
   custom_info JSONB,
   agent TEXT,
   image JSONB,
-  approval_status TEXT DEFAULT 'Pending',
+  approval_status TEXT DEFAULT 'pending',
   agency_id INTEGER,
   FOREIGN KEY (agency_id) REFERENCES agencies (id)
 );
 
 CREATE TABLE shopping_list_items (
   id SERIAL PRIMARY KEY,
-	item_category TEXT NOT NULL,
-	item_labels JSONB,
-	item_priority INTEGER,
-	date_requested DATE DEFAULT CURRENT_DATE,
+  item_type INTEGER,
+  item_labels JSONB,
+  item_priority INTEGER,
+  date_requested DATE DEFAULT CURRENT_DATE,
   client_id INTEGER,
+  FOREIGN KEY (item_type) REFERENCES item_types(id),
   FOREIGN KEY (client_id) REFERENCES clients (id)
 );
 
@@ -55,15 +56,15 @@ CREATE TABLE IF NOT EXISTS item_status(
   image JSONB,
   status TEXT NOT NULL,
   updated_at DATE,
+  item_inventory_id INTEGER,
   shopping_list_item_id INTEGER,
-  drop_locations INTEGER,
-  FOREIGN KEY (drop_locations) REFERENCES drop_locations(id),
+  FOREIGN KEY (item_inventory_id) REFERENCES item_inventory(id),
   FOREIGN KEY (shopping_list_item_id) REFERENCES shopping_list_items(id)
 );
 
 CREATE TABLE IF NOT EXISTS item_inventory (
   id SERIAL PRIMARY KEY,
-  item_type INTEGER NOT NULL,
+  item_type INTEGER,
   item_labels JSONB,
   item_status INTEGER,
   image JSONB,
