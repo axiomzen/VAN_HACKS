@@ -1,17 +1,22 @@
--- INSERT INTO item_types
-INSERT INTO item_types
-VALUES (1, 'Crib', '["size"]', 'a young child''s bed with barred or latticed sides.', '["instructions", "good condition", "clean"]', 36, '{}'), (2, 'Stroller', '["size", "type"]', 'A chair on wheels, typically folding, in which a baby or young child can be pushed along.', '["instructions", "good condition", "clean"]', 36, '{}'), (3, 'Diapers', '["size", "type"]', 'A piece of absorbent material wrapped around a baby''s bottom and between its legs to absorb and retain urine and feces', '["New"]', null, '{}'), (4, 'Toys', '["type", "age group"]', 'an object for a child to play with, typically a model or miniature replica of something.', '["Good Condition", "Clean"]', 12, '{}');
 
-INSERT INTO agencies
-VALUES (1, '{}', null, '778-331-4500', null, 'http://www.vacfss.com/programs/child-protection/', 'Aboriginal Child Protection Agency East Vancouver'), (2, '{}', null, '604-253-4044', null, 'UGM.ca', 'Union Gospel Mission'), (3, '{}', null, '604-895-5849', null, 'singlemothers@ywcavan.org', 'YWCA Single Mother’s Support Services'), (4, '{}', null, '604-872-7676', null, 'http://salvationarmyvcfs.com/', 'Salvation Army');
+INSERT INTO item_types(item_category, item_labels, description, requirements, exp_time_months, image)
+VALUES ('Crib', '["size"]', 'a young child''s bed with barred or latticed sides.', '["The crib has no cracks or breaks", "The crib does not have a drop-side", "Instructions for proper assembly and use are available, with crib or online", "The crib has not been recalled", "All hardware is complete and in a plastic bag or envelope attached to the crib. There are no missing parts."]', 36, '{}'),
+ ('Stroller', '["size", "type"]', 'A chair on wheels, typically folding, in which a baby or young child can be pushed along.', '["instructions", "good condition", "clean"]', 36, '{}'),
+  ('Diapers', '["size", "type"]', 'A piece of absorbent material wrapped around a baby''s bottom and between its legs to absorb and retain urine and feces', '["New"]', null, '{}'), 
+  ('Toys', '["type", "age group"]', 'an object for a child to play with, typically a model or miniature replica of something.', '["Good Condition", "Clean"]', 12, '{}');
 
-INSERT INTO clients
-VALUES (1, 'Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 'Pending', 1),
-(2, 'Regal', 'Ross', 'RossRegal@gmail.com', '225-333-1537', '{}', 'Tina Broth', '{}', 'Pending', 2);
+INSERT INTO agencies (image, email, phone, address, website, agency)
+VALUES ('{}', null, '778-331-4500', null, 'http://www.vacfss.com/programs/child-protection/', 'Aboriginal Child Protection Agency East Vancouver'), 
+('{}', null, '604-253-4044', null, 'UGM.ca', 'Union Gospel Mission'), 
+('{}', null, '604-895-5849', null, 'singlemothers@ywcavan.org', 'YWCA Single Mother’s Support Services'),
+('{}', null, '604-872-7676', null, 'http://salvationarmyvcfs.com/', 'Salvation Army');
 
-INSERT INTO shopping_list_items (id, item_priority, client_id, item_type)
-VALUES (1, 10, 1, 1),(2, 4, 2, 1),(3, 9, 2, 3);
+INSERT INTO clients (lname, fname, email, phone, custom_info, agent, image, agency_id)
+VALUES ('Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 1),
+('Regal', 'Ross', 'RossRegal@gmail.com', '225-333-1537', '{}', 'Tina Broth', '{}', 2);
 
+INSERT INTO shopping_list_items (item_priority, client_id, item_type)
+VALUES (10, 1, 1),(4, 2, 1),(9, 2, 3);
 
 INSERT INTO item_inventory (id, item_type, image, donor_email, added_by)
 VALUES 

@@ -6,6 +6,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 import {
   fetchItemTypes,
@@ -95,12 +96,16 @@ class ShoppingList extends Component {
         <Card>
           <CardHeader title="Existing Wish List" />
           <CardContent>
-            {this.state.shoppingList.map(item => {
-              const type = this.state.itemTypes[item.item_type - 1];
-              return (
-                <div key={item.id}>{type ? type.item_category : '??'}</div>
-              );
-            })}
+            <List>
+              {this.state.shoppingList.map(item => {
+                const type = this.state.itemTypes[item.item_type - 1];
+                return (
+                  <ListItem key={item.id}>
+                    {type ? type.item_category : '??'}
+                  </ListItem>
+                );
+              })}
+            </List>
             <div>
               <Button
                 type="button"
