@@ -4,7 +4,7 @@ export const fetchItemTypes = fetch('http://localhost:3000/item_types').then(
 
 export const fetchShoppingListItems = clientId =>
   fetch(
-    `http://localhost:3000/shopping_list_items?client_id=eq.${clientId}`
+    `http://localhost:2000/shopping_list_items?client_id=eq.${clientId}`
   ).then(res => res.json());
 
 export const submitShoppingListItem = (clientId, itemCategory) => {
