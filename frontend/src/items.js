@@ -10,10 +10,25 @@ import {
   ReferenceInput,
   SelectInput,
   SimpleForm,
-  AutocompleteInput,
   TextInput,
-  ReferenceField
+  ReferenceField,
+  Button
 } from 'react-admin';
+import ChatBubbleIcon from "../node_modules/@material-ui/icons/ChatBubble";
+import { Link } from 'react-router-dom';
+
+const CreateStatusButton = ({ record }) => (
+  <Button
+    component={Link}
+    to={{
+      pathname: '/item_status/create',
+      search: `?item_inventory_id=${record.id}`
+    }}
+    label="Create status"
+  >
+    <ChatBubbleIcon />
+  </Button>
+);
 
 export const ItemList = props => (
   <List {...props} title="Items">
@@ -39,19 +54,20 @@ export const ItemCreate = props => (
         <SelectInput optionText="status"/>
       </ReferenceInput>
       */}
-      <TextInput source="added_by" required={true}/>
+      <TextInput source="added_by" required={true} />
     </SimpleForm>
   </Create>
 );
 
 export const ItemEdit = props => (
-  <Edit {...props}>
+  <Edit {...props} title="Edit item">
     <SimpleForm>
       <DisabledInput source="id" />
       <ReferenceInput required={true} label="Type" source="item_type" reference="item_types">
         <SelectInput optionText="item_category"/>
       </ReferenceInput>
-      <TextInput source="added_by" required={true}/>
+      <TextInput source="added_by" required={true} />
+      <CreateStatusButton/>
     </SimpleForm>
   </Edit>
 );
