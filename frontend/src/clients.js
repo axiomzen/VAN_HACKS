@@ -89,6 +89,7 @@ export class ClientCreate extends Component {
 export class ClientEdit extends Component {
   state = {
     additionalFields: [],
+    activeTab: 1,
   };
 
   async componentDidMount() {
@@ -99,11 +100,33 @@ export class ClientEdit extends Component {
     });
   }
 
+  switchTabs(id) {
+    this.setState({
+      activeTab: id,
+    });
+  }
+
   render() {
     return (
       <Edit {...this.props}>
         <SimpleForm toolbar={<PostCreateToolbar />} redirect={redirect}>
           <h4>{`Referral #${this.props.id}`}</h4>
+          <div className="ClientTabs">
+            <div className={
+              `ClientTab
+              ${this.state.activeTab === 1 && 'ClientTab--selected'}`
+              } onClick={() => this.switchTabs(1)}
+            >
+              MAIN INFORMATION
+            </div>
+            <div className={
+              `ClientTab
+              ${this.state.activeTab === 2 && 'ClientTab--selected'}`
+            } onClick={() => this.switchTabs(2)}
+            >
+              ADDITIONAL INFORMATION
+            </div>
+          </div>
           {form(this.state, true)}
         </SimpleForm>
       </Edit>
@@ -112,47 +135,45 @@ export class ClientEdit extends Component {
 };
 
 function form(state, showApprovalStatus) {
-  return (
-    <TabbedShowLayout>
-      <Tab label="Main information">
-        <TextInput source="fname" label="First Name" />
-        <TextInput source="lname" label="Last Name" />
-        {showApprovalStatus &&
-          <SelectInput
-            source="approval_status"
-            choices={[
-              { id: 'Pending', name: 'Pending' },
-              { id: 'Approved', name: 'Approved' },
-              { id: 'Rejected', name: 'Rejected' }
-            ]}
-          />
-        }
-        <TextInput source="agency_id" label="Agency" />
-        <TextInput source="email" label="Email" />
-        <TextInput source="phone" label="Phone Number" />
-        <TextInput source="agent" label="Reference Agency" />
+  if (state.activeTab === 1) {
+    return (
+      [
+        <TextInput source="fname" label="First Name" />,
+        <TextInput source="lname" label="Last Name" />,
+        showApprovalStatus &&
+        <SelectInput
+          source="approval_status"
+          choices={[
+            { id: 'Pending', name: 'Pending' },
+            { id: 'Approved', name: 'Approved' },
+            { id: 'Rejected', name: 'Rejected' }
+          ]}
+        />,
+        <TextInput source="agency_id" label="Agency" />,
+        <TextInput source="email" label="Email" />,
+        <TextInput source="phone" label="Phone Number" />,
+        <TextInput source="agent" label="Reference Agency" />,
         <ImageInput source="image" label="Related pictures" accept="image/*">
           <ImageField source="src" title="title" />
-        </ImageInput>
-      </Tab>
-      {state.additionalFields && state.additionalFields.length > 0 &&
-        <Tab label="Additional information">
-          {state.additionalFields.map((field, id) => {
-            const source = slugify(`custom_info.${field.name}`);
-            switch (field.type.trim()) {
-              case 'LongTextInput':
-                return (<LongTextInput label={field.name} key={id} source={source}/>);
-              case 'FileInput':
-                return (<FileInput label={field.name} key={id} source={source}/>);
-              case 'BooleanInput':
-                return (<BooleanInput label={field.name} key={id} source={source}/>);
-              case 'TextInput':
-              default:
-                return (<TextInput label={field.name} key={id} source={source}/>);
-            }
-          })}
-        </Tab>
+        </ImageInput>,
+      ]
+    );
+  }
+  return (
+    state.additionalFields.map((field, id) => {
+      const source = slugify(`custom_info.${field.name}`);
+      switch (field.type.trim()) {
+        case 'LongTextInput':
+          return (<LongTextInput label={field.name} key={id} source={source}/>);
+        case 'FileInput':
+          return (<FileInput label={field.name} key={id} source={source}/>);
+        case 'BooleanInput':
+          return (<BooleanInput label={field.name} key={id} source={source}/>);
+        case 'TextInput':
+        default:
+          return (<TextInput label={field.name} key={id} source={source}/>);
       }
-    </TabbedShowLayout>
+    })
   );
 }
+
