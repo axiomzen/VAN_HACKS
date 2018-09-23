@@ -38,6 +38,7 @@ CREATE TABLE shopping_list_items (
   id SERIAL PRIMARY KEY, 
   item_labels JSONB, 
   item_priority INTEGER,
+  list_status TEXT DEFAULT 'awaiting',
   date_requested DATE DEFAULT CURRENT_DATE,
   client_id INTEGER,
   item_type INTEGER,
@@ -50,29 +51,28 @@ CREATE TABLE IF NOT EXISTS drop_locations(
   address TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS item_status(
-  id SERIAL PRIMARY KEY,
-  msg TEXT,
-  shared boolean,
-  status TEXT DEFAULT 'in-stock',
-  updated_at DATE DEFAULT CURRENT_DATE,
-  item_inventory_id INTEGER,
-  shopping_list_item_id INTEGER,
-  FOREIGN KEY (shopping_list_item_id) REFERENCES shopping_list_items(id)
-);
-
 CREATE TABLE IF NOT EXISTS item_inventory (
   id SERIAL PRIMARY KEY,
   item_type INTEGER,
   item_labels JSONB,
-  item_status INTEGER,
+  item_status TEXT DEFAULT 'in-stock',
   image JSONB,
   donor_email TEXT,
   location_id INTEGER,
-  added_by TEXT NOT NULL,
+  added_by TEXT,
   FOREIGN KEY (item_type) REFERENCES item_types(id),
-  FOREIGN KEY (item_status) REFERENCES item_status(id),
   FOREIGN KEY (location_id) REFERENCES drop_locations(id)
+);
+
+CREATE TABLE IF NOT EXISTS item_match(
+  id SERIAL PRIMARY KEY,
+  msg TEXT,
+  shared boolean,
+  updated_at DATE DEFAULT CURRENT_DATE,
+  item_inventory_id INTEGER,
+  shopping_list_item_id INTEGER,
+  FOREIGN KEY (shopping_list_item_id) REFERENCES shopping_list_items(id),
+  FOREIGN KEY (item_inventory_id) REFERENCES item_inventory(id)
 );
 
 CREATE TABLE IF NOT EXISTS referrals_form_inputs (
@@ -82,4 +82,3 @@ CREATE TABLE IF NOT EXISTS referrals_form_inputs (
   optional BOOLEAN DEFAULT false
 );
 
-ALTER TABLE item_status ADD CONSTRAINT fkey FOREIGN KEY (item_inventory_id) REFERENCES item_inventory(id);

@@ -16,18 +16,18 @@ VALUES ('Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany M
 ('Regal', 'Ross', 'RossRegal@gmail.com', '225-333-1537', '{}', 'Tina Broth', '{}', 2);
 
 INSERT INTO shopping_list_items (item_priority, client_id, item_type)
-VALUES (10, 1, 1),(4, 2, 1),(9, 2, 3);
+VALUES (10, 1, 1), (4, 2, 1), (9, 2, 3);
 
-INSERT INTO item_inventory (id, item_type, image, donor_email, added_by)
+INSERT INTO item_inventory (item_type, image, donor_email, added_by)
 VALUES 
-(1, 1, '{}', 'jimmy4@hotmail.com', 'Samantha H'), 
-(2, 1, '{}', 'Mather@gmail.com', 'Matheiw Matherr'),
-(3, 1, '{}', 'talliT@gmail.com', 'Talia T'),
-(4, 2, '{}', 'jonnieK@outlook.com', 'Jonnie K'),
-(5, 3, '{}', 'jimmy4@hotmail.com', 'Samantha H');
+(1, '{}', 'jimmy4@hotmail.com', 'Samantha H'), 
+(1, '{}', 'Mather@gmail.com', 'Matheiw Matherr'),
+(1, '{}', 'talliT@gmail.com', 'Talia T'),
+(2, '{}', 'jonnieK@outlook.com', 'Jonnie K'),
+(3, '{}', 'jimmy4@hotmail.com', 'Samantha H');
 
-INSERT INTO item_status (status, item_inventory_id, shopping_list_item_id)
-VALUES ('matched', 5, 3);
+INSERT INTO item_match (item_inventory_id, shopping_list_item_id)
+VALUES (5, 3);
 
 INSERT INTO referrals_form_inputs
 VALUES (1, 'First name', 'shortAnswer', 'FALSE');

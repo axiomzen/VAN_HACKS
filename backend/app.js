@@ -39,24 +39,31 @@ const pool = new pg.Pool(dbConfig);
 
 async function findMatch(typeId) {
   const client = await pool.connect()
-
   const res = await client.query(`
   SELECT 
   item_inventory.id as inv_id, shopping_list_items.id as list_id
 FROM item_inventory
 INNER JOIN shopping_list_items
   ON shopping_list_items.item_type = item_inventory.item_type
-LEFT JOIN item_status ON item_status.shopping_list_item_id = shopping_list_items.id
-WHERE item_status.status IS NULL AND item_inventory.item_type = $1
+WHERE item_inventory.item_type = $1
 ORDER BY shopping_list_items.item_priority
 LIMIT 1;
     `, [typeId]
   )
+  console.log(res.rows);
   if (res.rows.length > 0){
-    res2 = await client.query(`
-    INSERT INTO item_status (status, item_inventory_id, shopping_list_item_id)
-    VALUES ('matched', $1, $2);
+    let res2 = await client.query(`
+    INSERT INTO item_match (item_inventory_id, shopping_list_item_id)
+    VALUES ($1, $2);
       `, [res.rows[0].inv_id, res.rows[0].list_id]
+    )
+    let res3 = await client.query(`
+    UPDATE item_inventory SET item_status = 'matched' WHERE item_inventory.id = $1
+      `,[res.rows[0].inv_id]
+    )
+    let res4 = await client.query(`
+    UPDATE shopping_list_items SET list_status = 'matched' WHERE shopping_list_items.id = $1
+      `,[res.rows[0].list_id]
     )
   }
 }
