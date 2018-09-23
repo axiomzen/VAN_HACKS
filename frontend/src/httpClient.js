@@ -9,6 +9,8 @@ const httpClient = (url, options = {}) => {
 
     const token = localStorage.getItem('token');
     options.headers.set('Authorization', `Bearer ${token}`);
+    console.log(url);
+    //parse and if path certain thing mkaing a request to this
     return fetchUtils.fetchJson(url, options);
 };
 
