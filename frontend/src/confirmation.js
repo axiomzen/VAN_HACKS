@@ -1,12 +1,10 @@
 import React from 'react';
 
-const Confirmation = props => {
-  const {
-    match: {
-      params: { id }
-    }
-  } = props;
-  return <div>Thank you for submitting. The client's id is {id}</div>;
-};
+const Confirmation = props => (
+  <div className="confirmation">
+    <div>Thank you for your submision!</div>
+    <div>You will be contacted soon with an update</div>
+  </div>
+);
 
 export default Confirmation;

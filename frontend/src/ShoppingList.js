@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import { Link } from 'react-router-dom';
 
 import {
   fetchItemTypes,
@@ -94,26 +95,28 @@ class ShoppingList extends Component {
               </div>
             </form>
             <div className="mg">
-              {this.state.shoppingList.map(item => {
-                const type = this.state.itemTypes[item.item_type - 1];
-                return (
-                  <div className="item">
-                    <ListItem key={item.id}>
-                      {type ? type.item_category : '??'}
-                    </ListItem>
-                  </div>
-                );
-              })}
+              <List>
+                {this.state.shoppingList.map(item => {
+                  const type = this.state.itemTypes[item.item_type - 1];
+                  return (
+                    <div className="item" key={item.id}>
+                      <ListItem>{type ? type.item_category : '??'}</ListItem>
+                    </div>
+                  );
+                })}
+              </List>
             </div>
             <div className="mg">
-              <Button
-                type="button"
-                variant="raised"
-                color="primary"
-                onClick={() => {}}
-              >
-                Submit Wish List
-              </Button>
+              <Link to="/confirmation">
+                <Button
+                  type="button"
+                  variant="raised"
+                  color="primary"
+                  onClick={() => {}}
+                >
+                  Submit Wish List
+                </Button>
+              </Link>
             </div>
           </CardContent>
         </Card>

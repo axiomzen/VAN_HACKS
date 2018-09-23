@@ -102,4 +102,12 @@ div[class^='FormInput-input-'] {
 .mg {
   margin-top: 15px;
   margin-bottom: 15px;
+  min-width: 300px;
+}
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
