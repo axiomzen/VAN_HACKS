@@ -24,6 +24,7 @@ import { ItemList, ItemCreate, ItemEdit } from './items';
 import customRoutes from './customRoutes';
 import NavHeaderController from './NavHeaderController';
 import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
+import {ItemStatusCreate} from "./itemStatus";
 
 import './App.css';
 
@@ -58,7 +59,6 @@ const App = () => (
     />
 
     <Resource
-
       options={{label: "Items"}}
       name="item_inventory"
       list={ItemList}
@@ -76,7 +76,11 @@ const App = () => (
       />
 
     <Resource
-      name="item_status"/>
+      options={{label: "Item status"}}
+      name="item_status"
+      create={ItemStatusCreate}
+
+    />
 
     <Resource
       name="shopping_list_items"
