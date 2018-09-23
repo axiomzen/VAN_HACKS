@@ -13,6 +13,6 @@ const shoppingList = (
   <Route exact path="/shopping-list/:id" component={ShoppingList} />
 );
 
-const pickup = <Route exact path="/pickup/:id" component={Pickup} />;
+const pickup = <Route exact path="/pickup" component={Pickup} />;
 
 export default [confirmation, shoppingList, pickup];

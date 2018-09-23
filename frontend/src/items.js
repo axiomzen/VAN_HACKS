@@ -78,6 +78,14 @@ export const ItemEdit = props => (
         <SelectInput optionText="item_category" />
       </ReferenceInput>
       <TextInput source="added_by" required={true} />
+      <SelectInput
+        source="item_status"
+        choices={[
+          { id: 'matched', name: 'matched' },
+          { id: 'in-stock', name: 'in-stock' },
+          { id: 'donated', name: 'donated' }
+        ]}
+      />
       <CreateStatusButton />
     </SimpleForm>
   </Edit>
