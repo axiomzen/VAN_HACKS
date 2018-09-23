@@ -43,3 +43,17 @@
 .rejected {
   color: red;
 }
+
+.NavHeaderHidden .headroom-wrapper {
+  display: none !important;
+}
+
+.NavHeaderHidden div[class^="MuiDrawer-docked-"] {
+  display: none !important;
+}
+
+@media (min-width: 0px) {
+  .NavHeaderHidden div[class^="Layout-content-"] {
+    padding-left: 24px;
+  }
+}
