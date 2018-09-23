@@ -10,7 +10,6 @@
     "react-admin": "latest",
     "react-dom": "^16.5.2",
     "react-scripts": "1.1.5",
-    "ra-core": "latest",
     "ra-data-fakerest": "latest"
   },
   "scripts": {
@@ -27,5 +26,8 @@
       },
       "logLevel": "debug"
     }
+  },
+  "devDependencies": {
+    "admin-on-rest": "^1.4.1"
   }
 }

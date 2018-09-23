@@ -20,25 +20,27 @@ import {
 import { ItemList, ItemCreate, ItemEdit } from './items';
 
 // TODO: re-enable later
-// import httpClient from './httpClient';
+import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 import NavHeaderController from './NavHeaderController';
 import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
 
 import './App.css';
+import MyLoginPage from './MyLoginPage';
 
 // TODO: re-enable later
-// const dataProvider = postgrestProvider('/api', httpClient);
-const dataProvider = postgrestProvider('/api');
+const dataProvider = postgrestProvider('/api', httpClient);
+// const dataProvider = postgrestProvider('/api');
 
 // TODO: re-enable later
-// const authProvider = createAuthClient('/api');
+const authProvider = createAuthClient('/api');
 const App = () => (
   <Admin
     dataProvider={dataProvider}
     // TODO: re-enable later
-    // authProvider={authProvider}
+    authProvider={authProvider}
     customRoutes={customRoutes}
+    loginPage={() => <MyLoginPage authProvider={authProvider}/>}
   >
     <NavHeaderController />
     <Resource
