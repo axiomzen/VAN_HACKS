@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS item_status(
 
 CREATE TABLE IF NOT EXISTS item_inventory (
   id SERIAL PRIMARY KEY,
-  item_type INTEGER,
+  item_type INTEGER NOT NULL,
   item_labels JSONB,
   item_status INTEGER,
   image JSONB,
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS item_inventory (
   added_by TEXT NOT NULL,
   FOREIGN KEY (item_type) REFERENCES item_types(id),
   FOREIGN KEY (item_status) REFERENCES item_status(id),
-  FOREIGN KEY (location_id) REFERENCES shopping_list_items(id)
+  FOREIGN KEY (location_id) REFERENCES drop_locations(id)
 );
 
 CREATE TABLE IF NOT EXISTS referrals_form_inputs (

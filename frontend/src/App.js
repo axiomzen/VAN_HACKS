@@ -13,19 +13,30 @@ import {
   ReferralsFormFieldsCreate,
   ReferralsFormFieldsEdit
 } from './referralsFormFields';
-import httpClient from './httpClient';
+import { ItemList, ItemCreate, ItemEdit } from './items';
+
+// TODO: re-enable later
+// import httpClient from './httpClient';
 import customRoutes from './customRoutes';
+import NavHeaderController from './NavHeaderController';
+import {ItemTypesCreate, ItemTypesEdit, ItemTypesList} from "./itemTypes";
 
 import './App.css';
 
-const dataProvider = postgrestProvider('/api', httpClient);
-const authProvider = createAuthClient('/api');
+// TODO: re-enable later
+// const dataProvider = postgrestProvider('/api', httpClient);
+const dataProvider = postgrestProvider('/api');
+
+// TODO: re-enable later
+// const authProvider = createAuthClient('/api');
 const App = () => (
   <Admin
     dataProvider={dataProvider}
-    authProvider={authProvider}
+    // TODO: re-enable later
+    // authProvider={authProvider}
     customRoutes={customRoutes}
   >
+    <NavHeaderController />
     <Resource
       options={{ label: 'Clients form' }}
       name="referrals_form_inputs"
@@ -41,12 +52,39 @@ const App = () => (
     />
 
     <Resource
-      options={{ label: 'Shopping lists' }}
+
+      options={{label: "Items"}}
+      name="item_inventory"
+      list={ItemList}
+      create={ItemCreate}
+      edit={ItemEdit}
+    />
+
+    <Resource
+      options={{label: "Items types"}}
+      name="item_types"
+      list={ItemTypesList}
+      create={ItemTypesCreate}
+      edit={ItemTypesEdit}
+      />
+
+    <Resource
+      name="item_status"/>
+
+    <Resource
       name="shopping_list_items"
+      options={{ label: 'Shopping lists' }}
       list={ShoppingListsList}
       create={ShoppingListsCreate}
       edit={ShoppingListsEdit}
-    />
+      />
+
+    <Resource
+      name="drop_locations"/>
+
+    <Resource
+      name="agencies"/>
+
   </Admin>
 );
 
