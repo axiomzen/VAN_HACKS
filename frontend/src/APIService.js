@@ -7,6 +7,11 @@ export const fetchShoppingListItems = clientId =>
     `http://localhost:2000/shopping_list_items?client_id=eq.${clientId}`
   ).then(res => res.json());
 
+  export const fetchClientUpdate= clientId =>
+  fetch(
+    `http://localhost:2000/clients?client_id=eq.${clientId}`
+  ).then(res => res.json());
+
 export const submitShoppingListItem = (clientId, itemCategory) => {
   const data = {
     client_id: clientId,

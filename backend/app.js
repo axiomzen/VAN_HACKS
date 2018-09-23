@@ -50,6 +50,19 @@ transporter.sendMail(mailOptions, function(error, info){
 });
 return;
 }
+async function sendStatusChange(clientId) {
+  const client = await pool.connect()
+  const res = await client.query(`
+  SELECT 
+  c.approval_status 
+FROM clients as c
+WHERE c.id = $1
+LIMIT 1;
+    `, [clientId]
+  )
+  console.log(res);
+return;
+}
 
 async function findMatch(typeId) {
   const client = await pool.connect()
@@ -112,13 +125,28 @@ LIMIT 1;
     //email to doner 
     subject = 'Matched With Item On Wish List';
     msg = 
-    `Congratulation you have been matched with an item! Please click here to  schedule an appoitment to pick up your items. To see your current wish list or request new itemsYou visit: http://localhost:4000/#/shopping-List/${clientInfo.rows[0].id} /n
-    This item was donater by a generous member of your community. We encourage you to send a short message to tell them what this small act of kindness means to you and your baby. To do so please click 'here'`
+`
+<div>
+<div>Hi -name-,</div>
+<div>&nbsp;</div>
+<div>Congratulation you have been matched with a ${clientInfo.rows[0].item_category} from your wish list!</div>
+<div>&nbsp;</div>
+<div>Schedule an appoitment to pick up your items:&nbsp;<a href="http://localhost:4000/#/shopping-List/${clientInfo.rows[0].id}">http://localhost:4000/schedule</a></div>
+<br />
+<div>To see your current wish list or request new items visit: <a href="http://localhost:4000/#/shopping-List/${clientInfo.rows[0].id}">http://localhost:4000/#/shopping-List/${clientInfo.rows[0].id}</a></div>
+<div>&nbsp;</div>
+<div>This item was donater by a generous member of your community. We encourage you to send a short message to tell them what this small act of kindness means to you and your baby: <a href="http://localhost:4000/#/shopping-List/${clientInfo.rows[0].id}">http://localhost:4000/message</a></div>
+<div>&nbsp;</div>
+</div>
+<div><span style="font-size: 10pt;"><span style="font-family: calibri, sans-serif;"><strong>Stephanie Petersen</strong></span></span></div>
+<div><span style="font-family: calibri, sans-serif; font-size: 10pt;">Operations Manager, BabyGoRound</span><br /><span style="font-family: calibri, sans-serif; font-size: 10pt;">604-558-4840</span></div>
+`
     sendMail(clientInfo.rows[0].email, subject, msg)
   }
 }
 
 const matchingEndpoints = new Set(['/item_inventory', '/shopping_list_items'])
+const matchingEndpoints2 = new Set(['clients'])
 
 app.use('/', proxy(process.env.POSTGREST_HOST, {
 
@@ -130,8 +158,9 @@ app.use('/', proxy(process.env.POSTGREST_HOST, {
   },
 
   userResDecorator: async function(proxyRes, proxyResData, userReq, userRes) {
-    const isPost = userReq.method === 'POST'
-    const isPatch = userReq.method === 'PATCH' 
+    const isPost = userReq.method === 'POST';
+    const isPatch = userReq.method === 'PATCH';
+    console.log(userReq.url);
     if (isPost && matchingEndpoints.has(userReq.url)) {
       const response = JSON.parse(proxyResData)
       if (Array.isArray(response)) {
@@ -142,17 +171,22 @@ app.use('/', proxy(process.env.POSTGREST_HOST, {
         findMatch(response.item_type)
       }
     }
-
-    // if ('' && matchingEndpoints.has(userReq.url)) {
-    //   const response = JSON.parse(proxyResData)
-    //   if (Array.isArray(response)) {
-    //     for (const item of response) {
-    //       findMatch(item.item_type)
-    //     }
-    //   } else {
-    //     findMatch(response.item_type)
-    //   }
+    
+    else if (isPatch && matchingEndpoints2.has(userReq.url)) {
+      console.log('here');
+      const response = JSON.parse(proxyResData)
+      console.log(response);
+      if (Array.isArray(response)) {
+        for (const item of response) {
+          sendStatusChange(item.id)
+        }
+      } else {
+        sendStatusChange(response.id)
+      }
     }
+    
+
+
 
     return proxyResData
   }
