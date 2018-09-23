@@ -135,25 +135,24 @@ function form(state, showApprovalStatus) {
           <ImageField source="src" title="title" />
         </ImageInput>
       </Tab>
-      <Tab label="Additional information">
-        {state.additionalFields.map((field, id) =>
-          {
+      {state.additionalFields && state.additionalFields.length > 0 &&
+        <Tab label="Additional information">
+          {state.additionalFields.map((field, id) => {
             const source = slugify(`custom_info.${field.name}`);
             switch (field.type.trim()) {
               case 'LongTextInput':
-                return (<LongTextInput label={field.name} key={id} source={source} />);
+                return (<LongTextInput label={field.name} key={id} source={source}/>);
               case 'FileInput':
-                return (<FileInput label={field.name} key={id} source={source} />);
+                return (<FileInput label={field.name} key={id} source={source}/>);
               case 'BooleanInput':
-                return (<BooleanInput label={field.name}key={id} source={source} />);
+                return (<BooleanInput label={field.name} key={id} source={source}/>);
               case 'TextInput':
               default:
-                console.log(field.type);
-                return (<TextInput label={field.name} key={id} source={source} />);
+                return (<TextInput label={field.name} key={id} source={source}/>);
             }
-          }
-        )}
-      </Tab>
+          })}
+        </Tab>
+      }
     </TabbedShowLayout>
   );
 }
