@@ -20,7 +20,7 @@ import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 import NavHeaderController from './NavHeaderController';
 import { ItemTypesCreate, ItemTypesEdit, ItemTypesList } from './itemTypes';
-import {ItemStatusCreate} from "./itemStatus";
+import { ItemStatusCreate } from './itemStatus';
 
 import './App.css';
 import MyLoginPage from './MyLoginPage';
@@ -37,9 +37,15 @@ const App = () => (
     // TODO: re-enable later
     authProvider={authProvider}
     customRoutes={customRoutes}
-    loginPage={() => <MyLoginPage authProvider={authProvider}/>}
+    loginPage={() => <MyLoginPage authProvider={authProvider} />}
   >
-    <NavHeaderController />
+    <Resource
+      name="clients"
+      list={ClientList}
+      create={ClientCreate}
+      edit={ClientEdit}
+      icon={PersonIcon}
+    />
     <Resource
       options={{ label: 'Clients form' }}
       name="referrals_form_inputs"
@@ -48,16 +54,10 @@ const App = () => (
       edit={ReferralsFormFieldsEdit}
       icon={DescriptionIcon}
     />
-    <Resource
-      name="clients"
-      list={ClientList}
-      create={ClientCreate}
-      edit={ClientEdit}
-      icon={PersonIcon}
-    />
+    <NavHeaderController />
 
     <Resource
-      options={{label: "Items"}}
+      options={{ label: 'Items' }}
       name="item_inventory"
       list={ItemList}
       create={ItemCreate}
@@ -74,7 +74,7 @@ const App = () => (
     />
 
     <Resource
-      options={{label: "Item status"}}
+      options={{ label: 'Item status' }}
       name="item_status"
       create={ItemStatusCreate}
     />
