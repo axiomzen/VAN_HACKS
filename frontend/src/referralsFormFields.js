@@ -20,11 +20,10 @@ import {
 } from 'react-admin';
 
 const inputTypes = [
-  { id: 'shortAnswer', name: 'Short answer' },
-  { id: 'paragraph', name: 'Paragraph' },
-  { id: 'multipleChoices', name: 'Multiple choice' },
-  { id: 'checkboxes', name: 'Checkbox' },
-  { id: 'dropDown ', name: 'Drop-down' },
+  { id: 'TextInput', name: 'Short answer' },
+  { id: 'LongTextInput', name: 'Paragraph' },
+  { id: 'BooleanInput', name: 'Checkbox' },
+  { id: 'FileInput', name: 'File' },
 ];
 
 export const ReferralsFormFieldsList = props => (

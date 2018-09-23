@@ -7,18 +7,3 @@ VALUES (1, '{}', null, '778-331-4500', null, 'http://www.vacfss.com/programs/chi
 
 INSERT INTO clients
 VALUES (2, 'Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 'Pending', 1);
-
-INSERT INTO referrals_form_inputs
-VALUES (1, 'First name', 'shortAnswer', 'FALSE');
-
-INSERT INTO referrals_form_inputs
-VALUES (2, 'Last name', 'shortAnswer', 'FALSE');
-
-INSERT INTO referrals_form_inputs
-VALUES (3, 'Email', 'shortAnswer', 'FALSE');
-
-INSERT INTO referrals_form_inputs
-VALUES (4, 'Phone number', 'shortAnswer', 'FALSE');
-
-INSERT INTO referrals_form_inputs
-VALUES (5, 'Photo (URL)', 'shortAnswer', 'FALSE');

@@ -25,14 +25,6 @@ export const ShoppingListsList = props => (
   </List>
 );
 
-export const ShoppingListsCreate = props => (
-  <Create {...props}>
-    <SimpleForm>
-      <LongTextInput source="item_category" />
-    </SimpleForm>
-  </Create>
-);
-
 export const ShoppingListsEdit = props => (
   <Edit {...props}>
     <SimpleForm>
