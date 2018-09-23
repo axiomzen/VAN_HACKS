@@ -22,11 +22,11 @@ import {
   ImageInput,
   BooleanInput,
   FileInput,
+  FileField,
   TabbedShowLayout,
   Tab
 } from 'react-admin';
 import axios from 'axios';
-import slugify from 'slugify';
 
 import ApprovalStatusField from './ApprovalStatusField';
 
@@ -160,18 +160,23 @@ function form(state, showApprovalStatus) {
     );
   }
   return (
-    state.additionalFields.map((field, id) => {
-      const source = slugify(`custom_info.${field.name}`);
-      switch (field.type.trim()) {
+    state.additionalFields.map((field) => {
+      const { name, id, type } = field;
+      const source = `custom_info.${id}`;
+      switch (type.trim()) {
         case 'LongTextInput':
-          return (<LongTextInput label={field.name} key={id} source={source}/>);
+          return (<LongTextInput label={name} key={source} source={source}/>);
         case 'FileInput':
-          return (<FileInput label={field.name} key={id} source={source}/>);
+          return (
+          <FileInput source={source} label={name} key={source}>
+            <FileField source="src" title="title" />
+          </FileInput>
+        );
         case 'BooleanInput':
-          return (<BooleanInput label={field.name} key={id} source={source}/>);
+          return (<BooleanInput label={name} key={source} source={source}/>);
         case 'TextInput':
         default:
-          return (<TextInput label={field.name} key={id} source={source}/>);
+          return (<TextInput label={name} key={source} source={source} />);
       }
     })
   );
