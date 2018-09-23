@@ -2,6 +2,10 @@ import React from 'react';
 import { Admin, Resource } from 'react-admin';
 import postgrestProvider from './postgrestProvider';
 import createAuthClient from './authClient';
+import PersonIcon from '@material-ui/icons/Person';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import LabelIcon from '@material-ui/icons/Label';
 import { ClientList, ClientCreate, ClientEdit } from './clients';
 import {
   ShoppingListsList,
@@ -43,12 +47,14 @@ const App = () => (
       list={ReferralsFormFieldsList}
       create={ReferralsFormFieldsCreate}
       edit={ReferralsFormFieldsEdit}
+      icon={DescriptionIcon}
     />
     <Resource
       name="clients"
       list={ClientList}
       create={ClientCreate}
       edit={ClientEdit}
+      icon={PersonIcon}
     />
 
     <Resource
@@ -66,6 +72,7 @@ const App = () => (
       list={ItemTypesList}
       create={ItemTypesCreate}
       edit={ItemTypesEdit}
+      icon={LabelIcon}
       />
 
     <Resource
@@ -77,6 +84,7 @@ const App = () => (
       list={ShoppingListsList}
       create={ShoppingListsCreate}
       edit={ShoppingListsEdit}
+      icon={ShoppingBasketIcon}
       />
 
     <Resource

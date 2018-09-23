@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const port = 2000;
 const bodyParser = require('body-parser');
+const proxy = require('express-http-proxy');
 
 // Setup db
 const pg = require('pg');
@@ -35,17 +36,29 @@ const pool = new pg.Pool(dbConfig);
 // -> add to inventory
     // -> "match" function
 //  /item_inventory
-app.post('/item_inventory', (req, res, next) => {
-const { item_type, item_labels, item_status, image, donor_email, location_id, added_by } = req.body;
-  pool.connect((err, client, done) => {
-    if (err) {
-      return next(err);
-    }
-    // If firstname or lastname isnt sent, don't update
-    let queryString = 'INSERT INTO item_inventory VALUES ';
 
 
-});
+app.use('/', proxy(process.env.POSTGREST_HOST, {
+
+  /* perform code before requesting:
+  proxyReqPathResolver: (req) => {
+    process.nextTick(() => {
+      /// TODO
+    })
+    return req.url
+  }
+  */
+
+  // perform code after request has finished:
+  userResDecorator: function(proxyRes, proxyResData, userReq, userRes) {
+    // TODO
+    // e.g.
+    // requested URL: userReq.url
+    // response from API: JSON.parse(proxyResData))
+    return proxyResData
+  }
+}));
 
 app.listen(port, () =>
-  console.log(`Express server listening on port ${port}`));
+  console.log(`Express server listening on port ${port}`))
+
