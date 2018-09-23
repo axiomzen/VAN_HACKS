@@ -164,15 +164,18 @@ function form(state, showApprovalStatus) {
         label="First Name"
         defaultValue="Linda"
         fullWidth
+        key={0}
       />,
       <TextInput
         source="lname"
         label="Last Name"
         defaultValue="Johnson"
         fullWidth
+        key={1}
       />,
       showApprovalStatus && (
         <SelectInput
+          key={2}
           source="approval_status"
           choices={[
             { id: 'Pending', name: 'Pending' },
