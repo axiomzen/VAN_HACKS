@@ -38,7 +38,7 @@ export const ItemList = props => (
         <TextField source="item_category" />
       </ReferenceField>
       <TextField source="added_by" />
-      <TextField label="Status" source="item_status" />
+      <TextField label="Status" source="status" />
       <EditButton basePath="/item_inventory" />
     </Datagrid>
   </List>

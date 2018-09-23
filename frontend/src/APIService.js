@@ -10,9 +10,9 @@ export const fetchShoppingListItems = clientId =>
 export const submitShoppingListItem = (clientId, itemCategory) => {
   const data = {
     client_id: clientId,
-    item_type: itemCategory
+    item_type: Number(itemCategory)
   };
-  return fetch('http://localhost:3000/shopping_list_items', {
+  return fetch('http://localhost:2000/shopping_list_items', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8'
