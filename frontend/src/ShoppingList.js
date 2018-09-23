@@ -44,7 +44,7 @@ class ShoppingList extends Component {
       selectedItemType: value
     });
   };
-  handleClick = () => {
+  submitItem = () => {
     submitShoppingListItem(
       this.state.clientId,
       this.state.selectedItemType
@@ -56,7 +56,7 @@ class ShoppingList extends Component {
     return (
       <div>
         <Card>
-          <CardHeader title="Add Items to Shopping List" />
+          <CardHeader title="Add Items to Wish List" />
           <CardContent>
             <form className="" autoComplete="off">
               <div>
@@ -77,10 +77,7 @@ class ShoppingList extends Component {
                 <label>Add Details</label>
               </div>
               <div>
-                <input type="text" />
-              </div>
-              <div>
-                <button type="button" onClick={this.handleClick}>
+                <button type="button" onClick={this.submitItem}>
                   Add Item To list
                 </button>
               </div>
@@ -88,7 +85,7 @@ class ShoppingList extends Component {
           </CardContent>
         </Card>
         <Card>
-          <CardHeader title="Existing Shopping List" />
+          <CardHeader title="Existing Wish List" />
           <CardContent>
             {this.state.shoppingList.map(item => {
               const type = this.state.itemTypes[item.item_type - 1];
@@ -96,6 +93,9 @@ class ShoppingList extends Component {
                 <div key={item.id}>{type ? type.item_category : '??'}</div>
               );
             })}
+            <div>
+              <button>Submit Wish List</button>
+            </div>
           </CardContent>
         </Card>
       </div>
