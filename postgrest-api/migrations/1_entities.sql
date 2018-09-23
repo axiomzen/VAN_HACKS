@@ -1,15 +1,5 @@
 INSERT INTO auth.users VALUES ('demo@example.org', 'demo');
 
-CREATE TABLE IF NOT EXISTS item_types (
-  id SERIAL PRIMARY KEY,
-  item_category TEXT NOT NULL,
-  item_labels JSONB,
-  description TEXT,
-  requirements JSONB,
-  exp_time_months INTEGER,
-  image JSONB
-);
-
 CREATE TABLE IF NOT EXISTS agencies (
   id SERIAL PRIMARY KEY,
   image JSONB,
@@ -34,15 +24,25 @@ CREATE TABLE IF NOT EXISTS clients (
   FOREIGN KEY (agency_id) REFERENCES agencies (id)
 );
 
+CREATE TABLE IF NOT EXISTS item_types (
+  id SERIAL PRIMARY KEY,
+  item_category TEXT NOT NULL,
+  item_labels JSONB,
+  description TEXT,
+  requirements JSONB,
+  exp_time_months INTEGER,
+  image JSONB
+);
+
 CREATE TABLE shopping_list_items (
   id SERIAL PRIMARY KEY,
-  item_type INTEGER,
   item_labels JSONB,
   item_priority INTEGER,
   date_requested DATE DEFAULT CURRENT_DATE,
   client_id INTEGER,
-  FOREIGN KEY (item_type) REFERENCES item_types(id),
-  FOREIGN KEY (client_id) REFERENCES clients (id)
+  item_type INTEGER,
+  FOREIGN KEY (client_id) REFERENCES clients (id),
+  FOREIGN KEY (item_type) REFERENCES item_types(id)
 );
 
 CREATE TABLE IF NOT EXISTS drop_locations(
@@ -58,7 +58,6 @@ CREATE TABLE IF NOT EXISTS item_status(
   updated_at DATE,
   item_inventory_id INTEGER,
   shopping_list_item_id INTEGER,
-  FOREIGN KEY (item_inventory_id) REFERENCES item_inventory(id),
   FOREIGN KEY (shopping_list_item_id) REFERENCES shopping_list_items(id)
 );
 
@@ -82,3 +81,5 @@ CREATE TABLE IF NOT EXISTS referrals_form_inputs (
   type TEXT NOT NULL,
   optional BOOLEAN
 );
+
+ALTER TABLE item_status ADD CONSTRAINT fkey FOREIGN KEY (item_inventory_id) REFERENCES item_inventory(id);
