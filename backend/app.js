@@ -37,24 +37,53 @@ const pool = new pg.Pool(dbConfig);
     // -> "match" function
 //  /item_inventory
 
+async function findMatch(typeId) {
+  const client = await pool.connect()
+
+  // TODO:
+  // - join with status
+  // - exclude item which have status
+  // - order by priority
+  // - limit one
+
+  const res = await client.query(`
+      SELECT 
+          item_inventory.id AS item_inventory_id, 
+          shopping_list_items.id AS shopping_list_item_id
+      FROM item_inventory
+      INNER JOIN shopping_list_items
+          ON shopping_list_items.item_type = item_inventory.item_type
+      WHERE item_inventory.item_type = $1
+    `,
+    [typeId]
+  )
+  console.log("!!!", res.rows)
+}
+
+const matchingEndpoints = new Set(['/item_inventory', '/shopping_list_items'])
 
 app.use('/', proxy(process.env.POSTGREST_HOST, {
 
-  /* perform code before requesting:
-  proxyReqPathResolver: (req) => {
-    process.nextTick(() => {
-      /// TODO
+  proxyReqOptDecorator: function(proxyReqOpts) {
+    return new Promise(function(resolve) {
+      proxyReqOpts.headers['Prefer'] = 'return=representation'
+      resolve(proxyReqOpts);
     })
-    return req.url
-  }
-  */
+  },
 
-  // perform code after request has finished:
-  userResDecorator: function(proxyRes, proxyResData, userReq, userRes) {
-    // TODO
-    // e.g.
-    // requested URL: userReq.url
-    // response from API: JSON.parse(proxyResData))
+  userResDecorator: async function(proxyRes, proxyResData, userReq, userRes) {
+    const isPost = userReq.method === 'POST'
+    if (isPost && matchingEndpoints.has(userReq.url)) {
+      const response = JSON.parse(proxyResData)
+      if (Array.isArray(response)) {
+        for (const item of response) {
+          findMatch(item.item_type)
+        }
+      } else {
+        findMatch(response.item_type)
+      }
+    }
+
     return proxyResData
   }
 }));

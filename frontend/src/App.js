@@ -16,25 +16,28 @@ import {
 import { ItemList, ItemCreate, ItemEdit } from './items';
 
 // TODO: re-enable later
-// import httpClient from './httpClient';
+import httpClient from './httpClient';
 import customRoutes from './customRoutes';
 import NavHeaderController from './NavHeaderController';
 import { ItemTypesCreate, ItemTypesEdit, ItemTypesList } from './itemTypes';
+import {ItemStatusCreate} from "./itemStatus";
 
 import './App.css';
+import MyLoginPage from './MyLoginPage';
 
 // TODO: re-enable later
-// const dataProvider = postgrestProvider('/api', httpClient);
-const dataProvider = postgrestProvider('/api');
+const dataProvider = postgrestProvider('/api', httpClient);
+// const dataProvider = postgrestProvider('/api');
 
 // TODO: re-enable later
-// const authProvider = createAuthClient('/api');
+const authProvider = createAuthClient('/api');
 const App = () => (
   <Admin
     dataProvider={dataProvider}
     // TODO: re-enable later
-    // authProvider={authProvider}
+    authProvider={authProvider}
     customRoutes={customRoutes}
+    loginPage={() => <MyLoginPage authProvider={authProvider}/>}
   >
     <NavHeaderController />
     <Resource
@@ -54,7 +57,7 @@ const App = () => (
     />
 
     <Resource
-      options={{ label: 'Items' }}
+      options={{label: "Items"}}
       name="item_inventory"
       list={ItemList}
       create={ItemCreate}
@@ -70,7 +73,11 @@ const App = () => (
       icon={LabelIcon}
     />
 
-    <Resource name="item_status" />
+    <Resource
+      options={{label: "Item status"}}
+      name="item_status"
+      create={ItemStatusCreate}
+    />
 
     <Resource
       name="shopping_list_items"
