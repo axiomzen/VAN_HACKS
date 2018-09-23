@@ -12,7 +12,7 @@ VALUES ('{}', null, '778-331-4500', null, 'http://www.vacfss.com/programs/child-
 ('{}', null, '604-872-7676', null, 'http://salvationarmyvcfs.com/', 'Salvation Army');
 
 INSERT INTO clients (lname, fname, email, phone, custom_info, agent, image, agency_id)
-VALUES ('Smith', 'Lora', 'LoraSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 1),
+VALUES ('Smith', 'Lorean', 'LoreanLSmith@gmail.com', '905-323-1324', '{}', 'Mellany Mulik', '{}', 1),
 ('Regal', 'Ross', 'RossRegal@gmail.com', '225-333-1537', '{}', 'Tina Broth', '{}', 2);
 
 INSERT INTO shopping_list_items (item_priority, client_id, item_type)
@@ -20,11 +20,14 @@ VALUES (10, 1, 1), (4, 2, 1), (9, 2, 3);
 
 INSERT INTO item_inventory (item_type, image, donor_email, added_by)
 VALUES 
-(1, '{}', 'jimmy4@hotmail.com', 'Samantha H'), 
-(1, '{}', 'Mather@gmail.com', 'Matheiw Matherr'),
-(1, '{}', 'talliT@gmail.com', 'Talia T'),
-(2, '{}', 'jonnieK@outlook.com', 'Jonnie K'),
-(3, '{}', 'jimmy4@hotmail.com', 'Samantha H');
+(1, '{}', 'samH204@hotmail.com', 'Samantha H'), 
+(1, '{}', 'Mather@gmail.com', 'Stephanie B'),
+(1, '{}', 'talliT@gmail.com', 'Stephanie B'),
+(2, '{}', 'jonnieK@outlook.com', 'Stephanie B'),
+(3, '{}', 'samH20@hotmail.com', 'Samantha H'),
+(1, '{}', 'jimmyhshoe@gmail.com', 'Samantha H'),
+(2, '{}', 'jimmyhshoe@gmail.com', 'Samantha H'),
+(4, '{}', 'jimmyhshoe@gmail.com', 'Samantha H');
 
 INSERT INTO item_match (item_inventory_id, shopping_list_item_id)
 VALUES (5, 3);
